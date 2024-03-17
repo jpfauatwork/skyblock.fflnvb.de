@@ -21,7 +21,7 @@ jobs:
           git clone https://oauth2:${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/jpfauatwork/skyblock.fflnvb.de.git
           cp .skyblock.env skyblock.fflnvb.de/.env
           cd skyblock.fflnvb.de
-          /opt/plesk/php/8.3/bin/php /usr/lib/plesk-9.0/composer.phar update --optimize-autoloader --no-dev
+          /opt/plesk/php/8.3/bin/php /usr/lib/plesk-9.0/composer.phar install --optimize-autoloader --no-dev
           # /opt/plesk/php/8.3/bin/php artisan migrate:fresh --seed --force
           /opt/plesk/php/8.3/bin/php artisan key:generate
           /opt/plesk/php/8.3/bin/php artisan config:cache
