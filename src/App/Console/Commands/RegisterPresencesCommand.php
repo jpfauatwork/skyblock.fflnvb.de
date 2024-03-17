@@ -39,7 +39,7 @@ class RegisterPresencesCommand extends Command
                 ]
             );
         $jsonResponse = $response->json();
-        dd($jsonResponse);
+
         match ($jsonResponse['serverStatus']['online']) {
             true => $this->info("Server is up with {$jsonResponse['serverStatus']['players_online']}/{$jsonResponse['serverStatus']['max_players']} Players"),
             false => $this->warn('Server is down'),
