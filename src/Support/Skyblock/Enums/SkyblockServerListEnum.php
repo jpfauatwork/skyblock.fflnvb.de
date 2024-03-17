@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Support\Skyblock\Enums;
+namespace Support\Skyblock\Enums;
 
 enum SkyblockServerListEnum: int
 {

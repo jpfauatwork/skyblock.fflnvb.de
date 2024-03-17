@@ -6,6 +6,7 @@ use Domain\Player\Models\Player;
 use Domain\Presence\Models\Presence;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
+use Support\Skyblock\Enums\SkyblockServerListEnum;
 
 class RegisterPresencesCommand extends Command
 {
@@ -14,7 +15,7 @@ class RegisterPresencesCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'skyblock:check-server-status';
+    protected $signature = 'skyblock:register-presences';
 
     /**
      * The console command description.
@@ -30,7 +31,7 @@ class RegisterPresencesCommand extends Command
     {
         $response = Http::asForm()
             ->acceptJson()
-            ->post('https://skyblock.net/index.php?server-status/{Skyblock}/query',
+            ->post('https://skyblock.net/index.php?server-status/'.SkyblockServerListEnum::Economy->value.'/query',
                 [
                     '_xfResponseType' => 'json',
                     '_xfRequestUri' => '/',
@@ -38,7 +39,7 @@ class RegisterPresencesCommand extends Command
                 ]
             );
         $jsonResponse = $response->json();
-
+        dd($jsonResponse);
         match ($jsonResponse['serverStatus']['online']) {
             true => $this->info("Server is up with {$jsonResponse['serverStatus']['players_online']}/{$jsonResponse['serverStatus']['max_players']} Players"),
             false => $this->warn('Server is down'),
