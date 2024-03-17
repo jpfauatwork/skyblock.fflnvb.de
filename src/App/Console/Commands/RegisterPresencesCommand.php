@@ -78,9 +78,9 @@ class RegisterPresencesCommand extends Command
             ->get();
 
         foreach ($playerIds as $playerId) {
-            $existingPlayerPresence = $openPresences->where('player_id', $playerId);
+            $playerWasActiveOnLastCheck = $openPresences->where('player_id', $playerId);
 
-            if ($existingPlayerPresence->isNotEmpty()) {
+            if ($playerWasActiveOnLastCheck->isNotEmpty()) {
                 continue;
             }
 

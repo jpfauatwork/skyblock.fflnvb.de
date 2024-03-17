@@ -20,7 +20,7 @@ class Presence extends Model
 
     protected $fillable = [
         'player_id',
-        'started_at',
+        'joined_at',
     ];
 
     protected $casts = [
