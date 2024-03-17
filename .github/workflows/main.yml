@@ -19,7 +19,7 @@ jobs:
           # source ~/.nvm/nvm.sh
           cd httpdocs
           rm -r -f skyblock.fflnvb.de
-          git clone https://${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/jpfauatwork/skyblock.fflnvb.de.git
+          git clone https://oauth2:${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/jpfauatwork/skyblock.fflnvb.de.git
           cp .skyblock.env skyblock.fflnvb.de/.env
           cd skyblock.fflnvb.de
           /opt/plesk/php/8.3/bin/php /usr/lib/plesk-9.0/composer.phar update --optimize-autoloader --no-dev
