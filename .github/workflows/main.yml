@@ -17,7 +17,6 @@ jobs:
         script: |
           # export NVM_DIR=~/.nvm
           # source ~/.nvm/nvm.sh
-          cd httpdocs
           rm -r -f skyblock.fflnvb.de
           git clone https://oauth2:${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/jpfauatwork/skyblock.fflnvb.de.git
           cp .skyblock.env skyblock.fflnvb.de/.env
