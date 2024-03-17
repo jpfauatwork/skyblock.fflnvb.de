@@ -74,7 +74,7 @@ class RegisterPresencesCommand extends Command
     private function registerPresences(array $playerIds)
     {
         $openPresences = Presence::query()
-            ->whereNull('ended_at')
+            ->whereNull('left_at')
             ->get();
 
         foreach ($playerIds as $playerId) {
