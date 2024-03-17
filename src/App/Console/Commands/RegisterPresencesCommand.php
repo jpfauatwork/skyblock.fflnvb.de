@@ -86,14 +86,14 @@ class RegisterPresencesCommand extends Command
 
             Presence::create([
                 'player_id' => $playerId,
-                'started_at' => now(),
+                'joined_at' => now(),
             ]);
         }
 
         $endedPresences = $openPresences->whereNotIn('player_id', $playerIds)->pluck('id');
         Presence::whereIn('id', $endedPresences)
             ->update([
-                'ended_at' => now(),
+                'left_at' => now(),
             ]);
 
     }
