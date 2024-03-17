@@ -1,5 +1,6 @@
 <?php
 
+use App\Console\Commands\RegisterPlayersCommand;
 use App\Console\Commands\RegisterPresencesCommand;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
@@ -10,3 +11,4 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote')->hourly();
 
 Schedule::command(RegisterPresencesCommand::class)->everyFiveMinutes();
+Schedule::command(RegisterPlayersCommand::class)->everyThreeMinutes();

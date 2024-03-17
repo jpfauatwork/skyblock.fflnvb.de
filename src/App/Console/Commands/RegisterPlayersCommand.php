@@ -9,7 +9,7 @@ use Domain\Player\States\Scanned;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 
-class RegisterPlayers extends Command
+class RegisterPlayersCommand extends Command
 {
     /**
      * The name and signature of the console command.
@@ -35,7 +35,7 @@ class RegisterPlayers extends Command
     public function handle()
     {
         $player = Player::query()
-            ->whereState('state', [Scanned::class, Failed::class])
+            ->whereState('state', [Scanned::class])
             ->first();
 
         if (! $player) {
