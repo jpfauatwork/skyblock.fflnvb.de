@@ -1,5 +1,8 @@
 name: Run Migration
 
+on:
+  workflow_dispatch:
+  
 jobs:
   deploy:
     runs-on: ubuntu-latest
