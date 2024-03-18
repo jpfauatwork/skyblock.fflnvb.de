@@ -1,6 +1,8 @@
 <?php
 
 use App\Application;
+use App\Console\Commands\NotifyPresenceSubscriptionsCommand;
+use App\Console\Commands\PlaygroundCommand;
 use App\Console\Commands\RegisterPlayersCommand;
 use App\Console\Commands\RegisterPresencesCommand;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -22,6 +24,8 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withCommands([
         __DIR__.'/../src/App/Console/Commands',
         RegisterPresencesCommand::class,
-        RegisterPlayersCommand::class
+        RegisterPlayersCommand::class,
+        NotifyPresenceSubscriptionsCommand::class,
+        PlaygroundCommand::class,
     ])
     ->create();

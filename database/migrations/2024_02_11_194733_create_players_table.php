@@ -20,8 +20,8 @@ return new class extends Migration
             $table->foreignId('alt_from')->nullable()->constrained('players');
             $table->string('state');
             $table->dateTime('joined_at')->nullable();
-            $table->softDeletes();
-            $table->timestamps();
+            $table->datetimes();
+            $table->softDeletesDatetime();
 
             $table->index('mojang_id');
             $table->index('is_bedrock');

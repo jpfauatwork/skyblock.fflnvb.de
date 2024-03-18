@@ -2,15 +2,14 @@
 
 namespace Domain\Presence\Models;
 
+use App\Models\User;
 use Domain\Player\Models\Player;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\ModelStates\HasStates;
 
-class Presence extends Model
+class PresenceSubscription extends Model
 {
-    use HasStates;
     use SoftDeletes;
 
     /**
@@ -18,20 +17,24 @@ class Presence extends Model
      *
      * @var string
      */
-    protected $table = 'presences';
+    protected $table = 'presence_subscriptions';
 
     protected $fillable = [
-        'player_id',
-        'joined_at',
-    ];
-
-    protected $casts = [
-        'started_at' => 'datetime',
-        'ended_at' => 'datetime',
+        'telegram_id',
     ];
 
     public function player(): BelongsTo
     {
         return $this->belongsTo(Player::class);
+    }
+
+    public function presence(): BelongsTo
+    {
+        return $this->belongsTo(Presence::class);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }
