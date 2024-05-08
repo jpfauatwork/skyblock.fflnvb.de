@@ -11,19 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('presence_subscriptions', function (Blueprint $table) {
+        Schema::create('daily_player_presences', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
-            $table->string('telegram_id');
             $table->foreignId('player_id')->constrained('players');
-            $table->foreignId('presence_id')->nullable()->constrained('presences');
+            $table->dateTime('date');
+            $table->integer('playtime_minutes');
             $table->datetimes();
             $table->softDeletesDateTime();
 
-            $table->index('user_id');
             $table->index('player_id');
+            $table->index('date');
 
-            $table->unique(['user_id', 'player_id']);
+            $table->unique(['player_id', 'date']);
         });
     }
 
@@ -32,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('presence_subscriptions');
+        Schema::dropIfExists('daily_player_presences');
     }
 };
