@@ -33,7 +33,7 @@ class PlaygroundCommand extends Command
 
         $query = Presence::query()
         ->where('joined_at', '>', $this->date->startOfDay())
-        ->where('joined_at', '<', $this->date->endOfDay())
+        ->where('joined_at', '<', $this->date->copy()->endOfDay())
         ->groupBy('player_id');
 
         $uniquePlayers = $query->count();
