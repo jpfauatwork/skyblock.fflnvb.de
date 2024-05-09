@@ -27,8 +27,10 @@ class PlaygroundCommand extends Command
      */
     public function handle()
     {
-        $query = Presence::query()
+        $uniquePlayers = Presence::query()
             ->whereDate('joined_at', $this->option('date'))
             ->groupBy('player_id')->count();
+
+        $this->info("Unique Players: {$uniquePlayers}");
     }
 }
