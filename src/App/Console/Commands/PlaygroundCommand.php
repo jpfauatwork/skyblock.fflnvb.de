@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use Domain\Presence\Models\Presence;
 use Illuminate\Console\Command;
-
+use Illuminate\Support\Carbon;
 
 class PlaygroundCommand extends Command
 {
@@ -22,13 +22,17 @@ class PlaygroundCommand extends Command
      */
     protected $description = 'Testing Stuff';
 
+    protected Carbon $date;
+
     /**
      * Execute the console command.
      */
     public function handle()
     {
+        $this->date = Carbon::parse($this->option('date'));
         $uniquePlayers = Presence::query()
-            ->whereDate('joined_at', $this->option('date'))
+            ->where('joined_at', '<', $this->date->startOfDay())
+            ->where('joined_at', '>', $this->date->endOfDay())
             ->groupBy('player_id')->count();
 
         $this->info("Unique Players: {$uniquePlayers}");
