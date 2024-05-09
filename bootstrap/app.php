@@ -6,6 +6,7 @@ use App\Console\Commands\NotifyPresenceSubscriptionsCommand;
 use App\Console\Commands\PlaygroundCommand;
 use App\Console\Commands\RegisterPlayersCommand;
 use App\Console\Commands\RegisterPresencesCommand;
+use App\Console\Commands\Tmp\FixFullDaysCommand;
 use App\Console\Commands\Tmp\SplitPresencesPerDayCommand;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -32,5 +33,6 @@ return Application::configure(basePath: dirname(__DIR__))
         NotifyPresenceSubscriptionsCommand::class,
         SplitPresencesPerDayCommand::class,
         PlaygroundCommand::class,
+        FixFullDaysCommand::class,
     ])
     ->create();
