@@ -36,6 +36,11 @@ class SplitPresencesPerDayCommand extends Command
         $query->chunkById((int) $this->option('chunk'), function (Collection $presences) use ($bar) {
 
             $presences->each(function (Presence $presence) use ($bar){
+                if(is_null($presence->left_at)) {
+                    $bar->advance();
+                    return;
+                }
+
                 if($presence->joined_at->isSameDay($presence->left_at)) {
                     $bar->advance();
                     return;
