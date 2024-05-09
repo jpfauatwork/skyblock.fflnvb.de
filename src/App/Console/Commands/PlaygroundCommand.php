@@ -30,11 +30,14 @@ class PlaygroundCommand extends Command
     public function handle()
     {
         $this->date = Carbon::parse($this->argument('date'));
-        $uniquePlayers = Presence::query()
-            ->where('joined_at', '>', $this->date->startOfDay())
-            ->where('joined_at', '<', $this->date->endOfDay())
-            ->groupBy('player_id')->count();
 
+        $query = Presence::query()
+        ->where('joined_at', '>', $this->date->startOfDay())
+        ->where('joined_at', '<', $this->date->endOfDay())
+        ->groupBy('player_id');
+
+        $uniquePlayers = $query->count();
+        $this->info($query->toRawSql());
         $this->info("Unique Players: {$uniquePlayers}");
     }
 }
