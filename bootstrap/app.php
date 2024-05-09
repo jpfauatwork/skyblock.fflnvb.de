@@ -30,6 +30,7 @@ return Application::configure(basePath: dirname(__DIR__))
         CalculatePlaytimeCommand::class,
         SplitPresencesPerDayCommand::class,
         NotifyPresenceSubscriptionsCommand::class,
+        SplitPresencesPerDayCommand::class,
         PlaygroundCommand::class,
     ])
     ->create();
