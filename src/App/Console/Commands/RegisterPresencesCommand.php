@@ -71,8 +71,10 @@ class RegisterPresencesCommand extends Command
         ];
     }
 
-    private function registerPresences(array $playerIds)
+    private function registerPresences(array $playerIds): void
     {
+        $this->closeAllPresencesAtMidnight();
+
         $openPresences = Presence::query()
             ->whereNull('left_at')
             ->get();
@@ -92,6 +94,23 @@ class RegisterPresencesCommand extends Command
 
         $endedPresences = $openPresences->whereNotIn('player_id', $playerIds)->pluck('id');
         Presence::whereIn('id', $endedPresences)
+            ->update([
+                'left_at' => now(),
+            ]);
+
+    }
+
+    private function closeAllPresencesAtMidnight(): void
+    {
+        $presencesAlreadyCreatedToday = Presence::query()
+            ->where('joined_at', '>', now()->startOfDay())
+            ->count();
+
+        if($presencesAlreadyCreatedToday > 0) {
+            return;
+        }
+
+        Presence::whereNull('left_at')
             ->update([
                 'left_at' => now(),
             ]);
