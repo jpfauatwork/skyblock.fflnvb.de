@@ -13,7 +13,7 @@ class PlaygroundCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'laravel:playground {--date=2024-05-07: The Date to filter Presences by}';
+    protected $signature = 'laravel:playground {date}';
 
     /**
      * The console command description.
@@ -31,8 +31,8 @@ class PlaygroundCommand extends Command
     {
         $this->date = Carbon::parse($this->option('date'));
         $uniquePlayers = Presence::query()
-            ->where('joined_at', '<', $this->date->startOfDay())
-            ->where('joined_at', '>', $this->date->endOfDay())
+            ->where('joined_at', '>', $this->date->startOfDay())
+            ->where('joined_at', '<', $this->date->endOfDay())
             ->groupBy('player_id')->count();
 
         $this->info("Unique Players: {$uniquePlayers}");
