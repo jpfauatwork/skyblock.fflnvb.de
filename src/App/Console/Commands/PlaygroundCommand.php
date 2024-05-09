@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands;
 
-use App\Models\User;
+use Domain\Presence\Models\Presence;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Hash;
+
 
 class PlaygroundCommand extends Command
 {
@@ -13,7 +13,7 @@ class PlaygroundCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'laravel:playground';
+    protected $signature = 'laravel:playground {--date=2024-05-07: The Date to filter Presences by}';
 
     /**
      * The console command description.
@@ -27,10 +27,8 @@ class PlaygroundCommand extends Command
      */
     public function handle()
     {
-        $user = new User();
-        $user->password = Hash::make('Kartoffelsalat');
-        $user->email = 'offlinevibe@gmail.com';
-        $user->name = 'SaintOffline';
-        $user->save();
+        $query = Presence::query()
+            ->whereDate('joined_at', $this->option('date'))
+            ->groupBy('player_id')->count();
     }
 }
