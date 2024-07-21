@@ -2,15 +2,9 @@
 
 namespace App\Console\Commands;
 
-use Domain\Player\Models\Player;
-use Domain\Player\States\Failed;
-use Domain\Player\States\Registered;
-use Domain\Player\States\Scanned;
 use Domain\Presence\Models\Presence;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Http;
 
 class CalculatePlaytimeCommand extends Command
 {
@@ -41,9 +35,9 @@ class CalculatePlaytimeCommand extends Command
         $bar = $this->output->createProgressBar($query->count());
 
         $bar->start();
-        
+
         $query->chunkById($this->option('chunk'), function (Collection $presences) use ($bar) {
-            $presences->each(function (Presence $presence) use ($bar){
+            $presences->each(function (Presence $presence) use ($bar) {
                 $presence->update([
                     'playtime_minutes' => (int) $presence->joined_at->diffInMinutes($presence->left_at),
                 ]);
@@ -51,6 +45,6 @@ class CalculatePlaytimeCommand extends Command
             });
         });
         $bar->finish();
-        
+
     }
 }

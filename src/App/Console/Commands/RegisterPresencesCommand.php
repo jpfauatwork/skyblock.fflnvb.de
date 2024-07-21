@@ -3,13 +3,25 @@
 namespace App\Console\Commands;
 
 use Domain\Player\Models\Player;
+use Domain\Player\States\Scanned;
 use Domain\Presence\Models\Presence;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Http;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Support\Skyblock\Enums\SkyblockServerListEnum;
+use Support\Skyblock\ServerStatusApi\Client;
 
 class RegisterPresencesCommand extends Command
 {
+    protected Collection $playerDataCollection;
+
+    protected EloquentCollection $activePlayers;
+
+    protected EloquentCollection $openPresences;
+
+    protected array $presencesToBeCreated = [];
+
     /**
      * The name and signature of the console command.
      *
@@ -29,91 +41,99 @@ class RegisterPresencesCommand extends Command
      */
     public function handle()
     {
-        $response = Http::asForm()
-            ->acceptJson()
-            ->post('https://skyblock.net/index.php?server-status/'.SkyblockServerListEnum::Economy->value.'/query',
-                [
-                    '_xfResponseType' => 'json',
-                    '_xfRequestUri' => '/',
-                    '_xfNoRedirect' => '1',
-                ]
-            );
-        $jsonResponse = $response->json();
-
-        match ($jsonResponse['serverStatus']['online']) {
-            true => $this->info("Server is up with {$jsonResponse['serverStatus']['players_online']}/{$jsonResponse['serverStatus']['max_players']} Players"),
-            false => $this->warn('Server is down'),
-            default => $this->error('Cannot Read Info'),
-        };
-
-        $playerIds = [];
-
-        foreach ($jsonResponse['serverStatus']['player_list'] as $playerName) {
-            // Detect New Players
-            // TODO: Detect renaming
-            // TODO: Optimize WhereIn and map, nonmatched result in creation.
-            $player = Player::firstOrCreate([
-                'name' => $playerName,
-            ]);
-
-            $playerIds[] = $player->id;
-        }
-
-        $this->registerPresences($playerIds);
-
-        $keys = [
-            'serverStatus' => [
-                'online' => 'bool',
-                'players_online' => 'int',
-                'max_players' => 'int',
-                'player_list' => 'array',
-            ],
-        ];
-    }
-
-    private function registerPresences(array $playerIds): void
-    {
+        $this->getPlayerData();
+        $this->createOrGetPlayers();
         $this->closeAllPresencesAtMidnight();
-
-        $openPresences = Presence::query()
-            ->whereNull('left_at')
-            ->get();
-
-        foreach ($playerIds as $playerId) {
-            $playerWasActiveOnLastCheck = $openPresences->where('player_id', $playerId);
-
-            if ($playerWasActiveOnLastCheck->isNotEmpty()) {
-                continue;
-            }
-
-            Presence::create([
-                'player_id' => $playerId,
-                'joined_at' => now(),
-            ]);
-        }
-
-        $endedPresences = $openPresences->whereNotIn('player_id', $playerIds)->pluck('id');
-        Presence::whereIn('id', $endedPresences)
-            ->update([
-                'left_at' => now(),
-            ]);
-
+        $this->collectOpenPresences();
+        $this->registerPresences();
+        $this->closeRemainingPresences();
     }
 
-    private function closeAllPresencesAtMidnight(): void
+    protected function getPlayerData(): void
     {
-        $presencesAlreadyCreatedToday = Presence::query()
-            ->where('joined_at', '>', now()->startOfDay())
-            ->count();
+        $serverStatusRequest = app(Client::class)->post(SkyblockServerListEnum::Economy);
 
-        if($presencesAlreadyCreatedToday > 0) {
+        if (! $serverStatusRequest->isSuccessful) {
+            logger('Request failed: '.$serverStatusRequest->errorMessage);
+            $this->error('Request failed: '.$serverStatusRequest->errorMessage);
+
             return;
         }
 
-        Presence::whereNull('left_at')
+        $this->playerDataCollection = $serverStatusRequest->response()->playerList;
+    }
+
+    protected function createOrGetPlayers(): void
+    {
+        $this->activePlayers = Player::query()
+            ->whereIn('name', $this->playerDataCollection->pluck('name'))
+            ->get();
+
+        $newPlayersToBeRegistered = $this->playerDataCollection
+            ->whereNotIn('name', $this->activePlayers->pluck('name'))
+            ->toArray();
+
+        $massInsert = Arr::map($newPlayersToBeRegistered, fn (array $player) => [
+            'name' => $player['name'],
+            'state' => Scanned::$name,
+        ]);
+
+        Player::query()->upsert($massInsert, ['name']);
+
+        $this->activePlayers = Player::query()
+            ->whereIn('name', $this->playerDataCollection->pluck('name'))
+            ->get();
+    }
+
+    protected function closeAllPresencesAtMidnight(): void
+    {
+        if (! now()->between(
+            now()->startOfDay(),
+            now()->startOfDay()->addMinutes(4)
+        )) {
+            return;
+        }
+
+        Presence::query()
+            ->whereNull('left_at')
+            ->update([
+                'left_at' => now()->yesterday()->endOfDay(),
+            ]);
+    }
+
+    protected function collectOpenPresences(): void
+    {
+        $this->openPresences = Presence::query()
+            ->whereNull('left_at')
+            ->get();
+    }
+
+    protected function registerPresences(): void
+    {
+        $this->activePlayers->each(function (Player $player) {
+            $playerWasActiveOnLastCheck = $this->openPresences->where('player_id', $player->id)->count();
+
+            if ($playerWasActiveOnLastCheck) {
+                return;
+            }
+
+            $this->presencesToBeCreated[] = [
+                'player_id' => $player->id,
+                'joined_at' => now(),
+            ];
+        });
+
+        Presence::query()->upsert($this->presencesToBeCreated, 'player_id');
+    }
+
+    protected function closeRemainingPresences(): void
+    {
+        $endedPresences = $this->openPresences->whereNotIn('player_id', $this->activePlayers->pluck('id'));
+
+        Presence::query()
+            ->whereIn('id', $endedPresences->pluck('id'))
             ->update([
                 'left_at' => now(),
             ]);
-
     }
 }

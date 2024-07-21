@@ -2,9 +2,9 @@
 
 namespace Database\Factories;
 
+use Domain\Player\Models\Player;
 use Domain\Player\States\Registered;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Domain\Player\Models\Player;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<Player>

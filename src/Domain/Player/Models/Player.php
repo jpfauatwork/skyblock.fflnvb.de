@@ -17,8 +17,8 @@ use Spatie\ModelStates\HasStates;
  */
 class Player extends Model
 {
-    use HasStates;
     use HasFactory;
+    use HasStates;
 
     /**
      * The table associated with the model.

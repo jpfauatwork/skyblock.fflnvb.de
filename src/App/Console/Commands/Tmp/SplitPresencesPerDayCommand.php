@@ -32,17 +32,19 @@ class SplitPresencesPerDayCommand extends Command
         $bar = $this->output->createProgressBar($query->count());
 
         $bar->start();
-        
+
         $query->chunkById((int) $this->option('chunk'), function (Collection $presences) use ($bar) {
 
-            $presences->each(function (Presence $presence) use ($bar){
-                if(is_null($presence->left_at)) {
+            $presences->each(function (Presence $presence) use ($bar) {
+                if (is_null($presence->left_at)) {
                     $bar->advance();
+
                     return;
                 }
 
-                if($presence->joined_at->isSameDay($presence->left_at)) {
+                if ($presence->joined_at->isSameDay($presence->left_at)) {
                     $bar->advance();
+
                     return;
                 }
 
@@ -51,7 +53,7 @@ class SplitPresencesPerDayCommand extends Command
             });
         });
         $bar->finish();
-        
+
     }
 
     private function splitPresence(Presence $presence): void
@@ -65,18 +67,16 @@ class SplitPresencesPerDayCommand extends Command
 
         $dateShift = $nextDayPresence->joined_at;
 
-        while(!$dateShift->addDay()->isSameDay($nextDayPresence->left_at))
-        {
+        while (! $dateShift->addDay()->isSameDay($nextDayPresence->left_at)) {
             $midDayPresence = $nextDayPresence->replicate();
             $midDayPresence->fill([
-                'joined_at' => $dateShift->startOfDay(),
+                'joined_at' => $dateShift->startOfDay()->addSeconds(1),
                 'left_at' => $dateShift->endOfDay(),
                 'playtime_minutes' => 1440,
             ]);
             $midDayPresence->save();
-        };
+        }
 
-        
         $nextDayPresence->fill([
             'joined_at' => $nextDayPresence->left_at->startOfDay(),
             'playtime_minutes' => (int) $nextDayPresence->left_at->startOfDay()->diffInMinutes($nextDayPresence->left_at),

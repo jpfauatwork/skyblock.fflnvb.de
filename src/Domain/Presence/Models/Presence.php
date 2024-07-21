@@ -9,8 +9,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\ModelStates\HasStates;
 use Illuminate\Support\Carbon;
+use Spatie\ModelStates\HasStates;
 
 /**
  * @property Carbon joined_at
@@ -18,8 +18,8 @@ use Illuminate\Support\Carbon;
  */
 class Presence extends Model
 {
-    use HasStates;
     use HasFactory;
+    use HasStates;
     use SoftDeletes;
 
     /**

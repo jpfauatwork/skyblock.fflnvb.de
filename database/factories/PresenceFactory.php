@@ -3,8 +3,8 @@
 namespace Database\Factories;
 
 use Domain\Player\Models\Player;
-use Illuminate\Database\Eloquent\Factories\Factory;
 use Domain\Presence\Models\Presence;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<Presence>
@@ -27,6 +27,7 @@ class PresenceFactory extends Factory
     {
         $joinedAt = fake()->dateTimeBetween('-2 days', '-1 day');
         $leftAt = fake()->dateTimeBetween($joinedAt, '-1 day');
+
         return [
             'player_id' => Player::factory(),
             'joined_at' => $joinedAt,

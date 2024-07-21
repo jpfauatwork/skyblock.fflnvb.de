@@ -12,6 +12,4 @@ use Spatie\ModelStates\State;
     AllowTransition(Failed::class, Registered::class),
     DefaultState(Scanned::class),
 ]
-abstract class PlayerState extends State
-{
-}
+abstract class PlayerState extends State {}

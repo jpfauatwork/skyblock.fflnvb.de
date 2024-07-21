@@ -33,10 +33,10 @@ class FixFullDaysCommand extends Command
         $bar = $this->output->createProgressBar($query->count());
 
         $bar->start();
-        
+
         $query->chunkById((int) $this->option('chunk'), function (Collection $presences) use ($bar) {
 
-            $presences->each(function (Presence $presence) use ($bar){
+            $presences->each(function (Presence $presence) use ($bar) {
                 $presence->update([
                     'joined_at' => $presence->joined_at->startOfDay(),
                 ]);
@@ -44,6 +44,6 @@ class FixFullDaysCommand extends Command
             });
         });
         $bar->finish();
-        
+
     }
 }
