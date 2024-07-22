@@ -12,7 +12,7 @@ class TestController
     {
         $presences = Presence::query()
             ->with('player')
-            ->orderBy('joined_at', 'desc')
+            ->orderBy('updated_at', 'desc')
             ->limit(100)
             ->get();
 
