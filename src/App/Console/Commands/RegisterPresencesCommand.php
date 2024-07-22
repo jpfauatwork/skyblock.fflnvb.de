@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use Domain\Player\Models\Player;
-use Domain\Player\States\Scanned;
+use Domain\Presence\Models\Player;
+use Domain\Presence\States\Player\Scanned;
 use Domain\Presence\Models\Presence;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;

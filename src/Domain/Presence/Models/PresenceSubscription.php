@@ -3,7 +3,7 @@
 namespace Domain\Presence\Models;
 
 use App\Models\User;
-use Domain\Player\Models\Player;
+use Domain\Presence\Models\Player;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;

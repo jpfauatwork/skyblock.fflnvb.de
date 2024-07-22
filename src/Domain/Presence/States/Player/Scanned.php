@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Player\States;
+namespace Domain\Presence\States\Player;
 
 class Scanned extends PlayerState
 {

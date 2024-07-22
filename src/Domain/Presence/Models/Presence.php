@@ -3,7 +3,6 @@
 namespace Domain\Presence\Models;
 
 use Database\Factories\PresenceFactory;
-use Domain\Player\Models\Player;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

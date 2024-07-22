@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use Domain\Player\Models\Player;
-use Domain\Player\States\Registered;
+use Domain\Presence\Models\Player;
+use Domain\Presence\States\Player\Registered;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

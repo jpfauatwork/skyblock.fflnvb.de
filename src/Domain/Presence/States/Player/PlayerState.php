@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Player\States;
+namespace Domain\Presence\States\Player;
 
 use Spatie\ModelStates\Attributes\AllowTransition;
 use Spatie\ModelStates\Attributes\DefaultState;

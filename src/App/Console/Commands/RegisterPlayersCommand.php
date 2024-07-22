@@ -2,10 +2,10 @@
 
 namespace App\Console\Commands;
 
-use Domain\Player\Models\Player;
-use Domain\Player\States\Failed;
-use Domain\Player\States\Registered;
-use Domain\Player\States\Scanned;
+use Domain\Presence\Models\Player;
+use Domain\Presence\States\Player\Failed;
+use Domain\Presence\States\Player\Registered;
+use Domain\Presence\States\Player\Scanned;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 
