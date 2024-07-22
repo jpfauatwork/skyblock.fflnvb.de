@@ -5,7 +5,6 @@ namespace Domain\Presence\Models;
 use Database\Factories\PlayerFactory;
 use Domain\Presence\States\Player\PlayerState;
 use Domain\Presence\States\Player\Registered;
-use Domain\Presence\Models\Presence;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

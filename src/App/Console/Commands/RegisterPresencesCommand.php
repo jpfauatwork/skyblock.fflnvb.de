@@ -3,8 +3,8 @@
 namespace App\Console\Commands;
 
 use Domain\Presence\Models\Player;
-use Domain\Presence\States\Player\Scanned;
 use Domain\Presence\Models\Presence;
+use Domain\Presence\States\Player\Scanned;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Support\Arr;
