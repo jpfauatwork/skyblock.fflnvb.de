@@ -22,7 +22,7 @@ class NotifyPresenceSubscriptionsCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Notify Users via Telegram when player left';
+    protected $description = 'Notify Users via Telegram when a player left';
 
     /**
      * Execute the console command.
@@ -38,7 +38,7 @@ class NotifyPresenceSubscriptionsCommand extends Command
                     ->latest()
                     ->first();
 
-                if ($lastPresence->left_at && $subscription->presence_id !== $lastPresence->id) {
+                if ($this->notificationIsRequired($subscription, $lastPresence)) {
                     $subscription->presence()->associate($lastPresence);
                     $subscription->save();
 
@@ -50,5 +50,21 @@ class NotifyPresenceSubscriptionsCommand extends Command
             $subscription->user->notify(new PlayerDisconnectedNotification($subscription));
             Sleep::for(5)->seconds();
         });
+    }
+
+    protected function notificationIsRequired(PresenceSubscription $subscription, Presence $lastPresence): bool
+    {
+        return $this->playerIsNotOnline($lastPresence)
+            && $this->userHasNotBeenNotifiedYet($subscription, $lastPresence);
+    }
+
+    protected function playerIsNotOnline(Presence $lastPresence): bool
+    {
+        return filled($lastPresence->left_at);
+    }
+
+    protected function userHasNotBeenNotifiedYet(PresenceSubscription $subscription, Presence $lastPresence): bool
+    {
+        return $subscription->presence_id !== $lastPresence->id;
     }
 }
