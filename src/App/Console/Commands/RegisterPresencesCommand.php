@@ -89,7 +89,7 @@ class RegisterPresencesCommand extends Command
     {
         if (! now()->between(
             now()->startOfDay(),
-            now()->startOfDay()->addMinutes(4)
+            now()->startOfDay()->addMinutes(1)
         )) {
             return;
         }
