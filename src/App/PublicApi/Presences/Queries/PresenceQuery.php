@@ -35,6 +35,8 @@ class PresenceQuery extends QueryBuilder
             AllowedFilter::custom('joined_after', new GreaterThanFilter, 'joined_at'),
             AllowedFilter::custom('left_before', new LowerThanFilter, 'left_at'),
             AllowedFilter::custom('left_after', new GreaterThanFilter, 'left_at'),
+            AllowedFilter::custom('updated_before', new LowerThanFilter, 'updated_at'),
+            AllowedFilter::custom('updated_after', new GreaterThanFilter, 'updated_at'),
         ]);
     }
 
