@@ -1,11 +1,11 @@
 <?php
- 
+
 namespace App\Test\Resources;
- 
+
 use Domain\Presence\Models\Presence;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
- 
+
 /**
  * @mixin Presence
  */

@@ -3,6 +3,7 @@
 namespace Support\Skyblock\ServerStatusApi;
 
 use Illuminate\Support\Facades\Http;
+use Str;
 use Support\Data\ServerStatusData;
 use Support\Skyblock\Enums\SkyblockServerListEnum;
 
@@ -34,12 +35,12 @@ class Client
     {
         $request = Http::asForm()
             ->acceptJson()
-            ->post("https://skyblock.net/index.php?server-status/{$server->value}/query",
+            ->post(
+                Str::of(config('skyblock.server_status_url'))->replace('[server-id]', $server->value),
                 [
                     '_xfResponseType' => 'json',
                     '_xfRequestUri' => '/',
                     '_xfNoRedirect' => '1',
-                    'accept' => 'application/json',
                 ]
             );
 
