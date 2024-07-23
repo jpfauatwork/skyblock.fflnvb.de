@@ -11,7 +11,8 @@
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
         "spatie/laravel-data": "^4.7",
-        "spatie/laravel-model-states": "^2.7"
+        "spatie/laravel-model-states": "^2.7",
+        "spatie/laravel-query-builder": "^6.0"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^3.1",

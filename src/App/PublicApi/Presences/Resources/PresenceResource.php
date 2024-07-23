@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Test\Resources;
+namespace App\PublicApi\Presences\Resources;
 
 use Domain\Presence\Models\Presence;
 use Illuminate\Http\Request;
