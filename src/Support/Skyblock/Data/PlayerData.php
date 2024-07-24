@@ -1,6 +1,6 @@
 <?php
 
-namespace Support\Data;
+namespace Support\Skyblock\Data;
 
 use Spatie\LaravelData\Attributes\MapName;
 use Spatie\LaravelData\Data;

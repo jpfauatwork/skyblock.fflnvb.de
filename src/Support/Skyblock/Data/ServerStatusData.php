@@ -1,6 +1,6 @@
 <?php
 
-namespace Support\Data;
+namespace Support\Skyblock\Data;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;

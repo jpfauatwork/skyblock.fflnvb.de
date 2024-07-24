@@ -2,9 +2,10 @@
 
 namespace Support\Skyblock\ServerStatusApi;
 
+use Exception;
 use Illuminate\Support\Facades\Http;
 use Str;
-use Support\Data\ServerStatusData;
+use Support\Skyblock\Data\ServerStatusData;
 use Support\Skyblock\Enums\SkyblockServerListEnum;
 
 class Client
@@ -20,7 +21,7 @@ class Client
         try {
             $response = $this->sendRequest($server);
             $this->serverStatusData = ServerStatusData::createFromSkyblockClient($response);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->errorMessage = $e->getMessage();
 
             return $this;
