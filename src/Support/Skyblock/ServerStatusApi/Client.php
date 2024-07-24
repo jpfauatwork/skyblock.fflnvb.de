@@ -27,6 +27,7 @@ class Client
             return $this;
         }
 
+        $this->errorMessage = 'No errors';
         $this->isSuccessful = true;
 
         return $this;
