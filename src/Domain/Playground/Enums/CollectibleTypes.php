@@ -2,7 +2,8 @@
 
 namespace Domain\Playground\Enums;
 
-enum CollectibleTypes: string {
+enum CollectibleTypes: string
+{
     case Head = 'head';
     case Armor = 'armor';
 }

@@ -65,6 +65,5 @@ class PlaygroundController
 
         dump($collectibleDataCollection);
         dump($collectibleDataCollection->toCollection()->sum('amount'));
-
     }
 }
