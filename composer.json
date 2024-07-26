@@ -15,7 +15,6 @@
         "spatie/laravel-query-builder": "^6.0"
     },
     "require-dev": {
-        "barryvdh/laravel-ide-helper": "^3.1",
         "fakerphp/faker": "^1.23",
         "laravel/pint": "^1.13",
         "laravel/sail": "^1.30",
