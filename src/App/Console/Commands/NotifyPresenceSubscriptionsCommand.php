@@ -12,7 +12,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Sleep;
 
 /**
- * @property Collection<int, PresenceSubscription> $presenceSubscriptions
+ * @property EloquentCollection<int, PresenceSubscription> $presenceSubscriptions
  * @property Collection<int, PresenceSubscription> $presenceSubscriptionsToNotify
  */
 class NotifyPresenceSubscriptionsCommand extends Command
@@ -33,7 +33,7 @@ class NotifyPresenceSubscriptionsCommand extends Command
 
     protected EloquentCollection $presenceSubscriptions;
 
-    protected EloquentCollection $presenceSubscriptionsToNotify;
+    protected Collection $presenceSubscriptionsToNotify;
 
     /**
      * Execute the console command.
