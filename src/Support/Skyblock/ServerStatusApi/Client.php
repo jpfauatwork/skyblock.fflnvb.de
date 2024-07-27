@@ -3,6 +3,7 @@
 namespace Support\Skyblock\ServerStatusApi;
 
 use Exception;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 use Support\Skyblock\Data\ServerStatusData;
@@ -20,7 +21,7 @@ class Client
     {
         try {
             $response = $this->sendRequest($server);
-            $this->serverStatusData = ServerStatusData::createFromSkyblockClient($response);
+            $this->serverStatusData = ServerStatusData::from(Arr::get($response, 'serverStatus', []));
         } catch (Exception $e) {
             $this->errorMessage = $e->getMessage();
 

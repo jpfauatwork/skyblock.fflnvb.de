@@ -13,12 +13,13 @@ use Support\Skyblock\Enums\SkyblockServerListEnum;
 use Support\Skyblock\ServerStatusApi\Client;
 
 /**
+ * @property Collection<int, string> $playerList
  * @property EloquentCollection<int, Player> $activePlayers
  * @property EloquentCollection<int, Presence> $openPresences
  */
 class RegisterPresencesAction
 {
-    protected Collection $playerDataCollection;
+    protected Collection $playerList;
 
     protected EloquentCollection $activePlayers;
 
@@ -45,28 +46,31 @@ class RegisterPresencesAction
             throw new Exception('Request failed: '.$serverStatusRequest->errorMessage);
         }
 
-        $this->playerDataCollection = $serverStatusRequest->response()->playerList;
+        $this->playerList = collect($serverStatusRequest->response()->playerList);
     }
 
     protected function createOrGetPlayers(): void
     {
-        $this->activePlayers = Player::query()
-            ->whereIn('name', $this->playerDataCollection->pluck('name'))
-            ->get();
+        $this->collectActivePlayers();
 
-        $newPlayersToBeRegistered = $this->playerDataCollection
-            ->whereNotIn('name', $this->activePlayers->pluck('name'))
+        $newPlayersToBeRegistered = $this->playerList
+            ->diff($this->activePlayers->pluck('name'))
             ->toArray();
 
-        $massInsert = Arr::map($newPlayersToBeRegistered, fn (array $player) => [
-            'name' => $player['name'],
+        $massInsert = Arr::map($newPlayersToBeRegistered, fn (string $name) => [
+            'name' => $name,
             'state' => Scanned::$name,
         ]);
 
         Player::query()->upsert($massInsert, ['name']);
 
+        $this->collectActivePlayers();
+    }
+
+    protected function collectActivePlayers(): void
+    {
         $this->activePlayers = Player::query()
-            ->whereIn('name', $this->playerDataCollection->pluck('name'))
+            ->whereIn('name', $this->playerList)
             ->get();
     }
 

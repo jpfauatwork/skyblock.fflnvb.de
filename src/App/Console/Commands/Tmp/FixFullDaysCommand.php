@@ -25,7 +25,7 @@ class FixFullDaysCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): void
     {
         $query = Presence::query()
             ->where('playtime_minutes', 1440);
