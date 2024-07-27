@@ -16,6 +16,7 @@
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
+        "larastan/larastan": "^2.0",
         "laravel/pint": "^1.13",
         "laravel/sail": "^1.30",
         "laravel/telescope": "^5.1",
@@ -56,7 +57,9 @@
             "@php artisan migrate --graceful --ansi"
         ],
         "lint": "vendor/bin/pint --test",
-        "lint:fix": "vendor/bin/pint"
+        "lint:fix": "vendor/bin/pint",
+        "test:types": "vendor/bin/phpstan analyse --ansi --memory-limit=6G",
+        "test": "vendor/bin/pest"
     },
     "extra": {
         "laravel": {
