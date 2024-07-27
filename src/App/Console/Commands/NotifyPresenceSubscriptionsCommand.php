@@ -98,9 +98,8 @@ class NotifyPresenceSubscriptionsCommand extends Command
 
     protected function updateSubscription(PresenceSubscription $subscription, Presence $lastPresence): void
     {
-        $subscription->update([
-            'presence_id' => $lastPresence->id,
-        ]);
+        $subscription->presence_id = $lastPresence->id;
+        $subscription->save();
     }
 
     protected function notifyPresenceSubscriptions(): void
