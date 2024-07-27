@@ -15,4 +15,4 @@ jobs:
         password: ${{ secrets.SSH_PASSWORD }}
         script: |
           cd skyblock.fflnvb.de
-          /opt/plesk/php/8.3/bin/php artisan migrate --pretend
+          /opt/plesk/php/8.3/bin/php artisan migrate --pretend --force
