@@ -3,6 +3,7 @@ name: Deploy Live
 on:
   push:
     branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -29,5 +30,3 @@ jobs:
           /opt/plesk/php/8.3/bin/php artisan view:cache
           # npm install
           # npm run build
-
-
