@@ -4,7 +4,7 @@ namespace Support\Skyblock\ServerStatusApi;
 
 use Exception;
 use Illuminate\Support\Facades\Http;
-use Str;
+use Illuminate\Support\Str;
 use Support\Skyblock\Data\ServerStatusData;
 use Support\Skyblock\Enums\SkyblockServerListEnum;
 

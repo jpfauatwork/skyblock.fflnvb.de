@@ -2,7 +2,6 @@
 
 namespace Domain\Presence\Models;
 
-use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -30,10 +29,5 @@ class PresenceSubscription extends Model
     public function presence(): BelongsTo
     {
         return $this->belongsTo(Presence::class);
-    }
-
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
     }
 }

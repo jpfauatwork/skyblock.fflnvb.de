@@ -47,7 +47,7 @@ class NotifyPresenceSubscriptionsCommand extends Command
             });
 
         $notifications->each(function (PresenceSubscription $subscription) {
-            $subscription->user->notify(new PlayerDisconnectedNotification($subscription));
+            $subscription->player->notify(new PlayerDisconnectedNotification($subscription));
             Sleep::for(5)->seconds();
         });
     }

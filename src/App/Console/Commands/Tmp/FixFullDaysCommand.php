@@ -4,7 +4,7 @@ namespace App\Console\Commands\Tmp;
 
 use Domain\Presence\Models\Presence;
 use Illuminate\Console\Command;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection;
 
 class FixFullDaysCommand extends Command
 {

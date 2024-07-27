@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use Domain\Presence\Models\DailyPlayerPresence;
 use Domain\Presence\Models\Presence;
 use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
@@ -24,6 +25,8 @@ class PlaygroundCommand extends Command
 
     protected Carbon $date;
 
+    protected int $uniquePlayers = 0;
+
     /**
      * Execute the console command.
      */
@@ -31,13 +34,36 @@ class PlaygroundCommand extends Command
     {
         $this->date = Carbon::parse($this->argument('date'));
 
-        $query = Presence::query()
-        ->where('joined_at', '>', $this->date->startOfDay())
-        ->where('joined_at', '<', $this->date->copy()->endOfDay())
-        ->groupBy('player_id');
+        $presencesOfGivenDay = Presence::query()
+            ->where('joined_at', '>', $this->date->startOfDay())
+            ->where('joined_at', '<', $this->date->copy()->endOfDay())
+            ->groupBy('player_id')
+            ->selectRaw('player_id, SUM(playtime_minutes) AS playtime_minutes')
+            ->orderBy('player_id', 'asc')
+            ->get();
 
-        $uniquePlayers = $query->count();
-        $this->info($query->toRawSql());
-        $this->info("Unique Players: {$uniquePlayers}");
+        $currentPlayerId = null;
+
+        $totalPlaytime = 0;
+
+        $presencesOfGivenDay->each(function (Presence $presence) use (&$currentPlayerId, &$totalPlaytime) {
+            if ($currentPlayerId !== $presence->player_id) {
+
+                $this->uniquePlayers++;
+                $currentPlayerId = $presence->player_id;
+
+                $dailyPlayerPresence =
+                DailyPlayerPresence::create([
+                    'date' => $this->date,
+                    'player_id' => $presence->player_id,
+                    'playtime_minutes' => $totalPlaytime,
+                ]);
+
+                $totalPlaytime = 0;
+            }
+
+            $totalPlaytime += $presence->playtime_minutes;
+        });
+
     }
 }

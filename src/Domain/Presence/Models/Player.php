@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Notifications\Notifiable;
 use Spatie\ModelStates\HasStates;
 
 /**
@@ -18,6 +19,7 @@ class Player extends Model
 {
     use HasFactory;
     use HasStates;
+    use Notifiable;
 
     /**
      * The table associated with the model.

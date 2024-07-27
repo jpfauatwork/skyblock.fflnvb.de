@@ -2,9 +2,6 @@
 
 namespace Domain\Presence\Models;
 
-use Database\Factories\PresenceFactory;
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -13,14 +10,10 @@ use Spatie\ModelStates\HasStates;
 
 /**
  * @property int $id
- * @property int $player_id
- * @property ?Carbon $joined_at
- * @property ?Carbon $left_at
- * @property int $playtime_minutes
+ * @property Carbon $date
  */
-class Presence extends Model
+class DailyPlayerPresence extends Model
 {
-    use HasFactory;
     use HasStates;
     use SoftDeletes;
 
@@ -29,27 +22,19 @@ class Presence extends Model
      *
      * @var string
      */
-    protected $table = 'presences';
+    protected $table = 'daily_player_presences';
 
     protected $fillable = [
-        'player_id',
-        'joined_at',
-        'left_at',
+        'date',
         'playtime_minutes',
     ];
 
     protected $casts = [
-        'joined_at' => 'datetime',
-        'left_at' => 'datetime',
+        'date' => 'datetime',
     ];
 
     public function player(): BelongsTo
     {
         return $this->belongsTo(Player::class);
-    }
-
-    public static function newFactory(): Factory
-    {
-        return PresenceFactory::new();
     }
 }

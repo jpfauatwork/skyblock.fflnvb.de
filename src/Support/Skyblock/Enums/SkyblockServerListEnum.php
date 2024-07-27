@@ -2,7 +2,7 @@
 
 namespace Support\Skyblock\Enums;
 
-enum SkyblockServerListEnum: int
+enum SkyblockServerListEnum: string
 {
-    case Economy = 6;
+    case Economy = '6';
 }

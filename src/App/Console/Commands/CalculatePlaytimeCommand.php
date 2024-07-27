@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use Domain\Presence\Models\Presence;
 use Illuminate\Console\Command;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection;
 
 class CalculatePlaytimeCommand extends Command
 {
@@ -27,6 +27,8 @@ class CalculatePlaytimeCommand extends Command
      */
     public function handle()
     {
+        $chunk = (int) $this->option('chunk');
+
         $query = Presence::query()
             ->whereNotNull('joined_at')
             ->whereNotNull('left_at')
@@ -36,7 +38,7 @@ class CalculatePlaytimeCommand extends Command
 
         $bar->start();
 
-        $query->chunkById($this->option('chunk'), function (Collection $presences) use ($bar) {
+        $query->chunkById($chunk, function (Collection $presences) use ($bar) {
             $presences->each(function (Presence $presence) use ($bar) {
                 $presence->update([
                     'playtime_minutes' => (int) $presence->joined_at->diffInMinutes($presence->left_at),

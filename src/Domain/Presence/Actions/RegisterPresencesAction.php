@@ -12,6 +12,10 @@ use Illuminate\Support\Collection;
 use Support\Skyblock\Enums\SkyblockServerListEnum;
 use Support\Skyblock\ServerStatusApi\Client;
 
+/**
+ * @property EloquentCollection<int, Player> $activePlayers
+ * @property EloquentCollection<int, Presence> $openPresences
+ */
 class RegisterPresencesAction
 {
     protected Collection $playerDataCollection;
@@ -39,8 +43,6 @@ class RegisterPresencesAction
         if (! $serverStatusRequest->isSuccessful) {
             logger('Request failed: '.$serverStatusRequest->errorMessage);
             throw new Exception('Request failed: '.$serverStatusRequest->errorMessage);
-
-            return;
         }
 
         $this->playerDataCollection = $serverStatusRequest->response()->playerList;
