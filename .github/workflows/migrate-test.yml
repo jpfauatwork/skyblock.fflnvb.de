@@ -1,4 +1,4 @@
-name: Run Migration
+name: Simulate Migration
 
 on:
   workflow_dispatch:
