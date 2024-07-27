@@ -56,6 +56,8 @@ class NotifyPresenceSubscriptionsCommand extends Command
 
     protected function checkPresenceSubscriptions(): void
     {
+        $this->presenceSubscriptionsToNotify = new Collection();
+
         $this->presenceSubscriptions->each(function (PresenceSubscription $subscription) {
             $lastPresence = $this->lastPresence($subscription->player);
 
