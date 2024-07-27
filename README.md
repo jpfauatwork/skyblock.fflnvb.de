@@ -5,11 +5,7 @@ It is based on Laravel and will grow in functionalities.
 
 ## Features
 
-The following list depicts the goals of this supercollection
+The following features are already implemented
 
 - Monitor Player presences
-- Creating Statistics on Playertimes
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- Notify subscribed players via Telegram on disconnect
