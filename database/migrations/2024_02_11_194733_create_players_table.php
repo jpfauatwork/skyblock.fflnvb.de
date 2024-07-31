@@ -15,17 +15,15 @@ return new class extends Migration
             $table->id();
             $table->string('mojang_id')->unique()->nullable();
             $table->string('name');
-            $table->json('aliases')->nullable();
             $table->boolean('is_bedrock')->nullable();
-            $table->foreignId('alt_from')->nullable()->constrained('players');
-            $table->string('state');
+            $table->foreignId('alt_of')->nullable();
             $table->dateTime('joined_at')->nullable();
+            $table->uuid('registering_uuid')->nullable();
             $table->datetimes();
             $table->softDeletesDatetime();
 
             $table->index('mojang_id');
             $table->index('is_bedrock');
-            $table->index('state');
         });
     }
 

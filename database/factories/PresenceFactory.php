@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use Domain\Presence\Models\Player;
+use Domain\Player\Models\Player;
 use Domain\Presence\Models\Presence;
 use Illuminate\Database\Eloquent\Factories\Factory;
 

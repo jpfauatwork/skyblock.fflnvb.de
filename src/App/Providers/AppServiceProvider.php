@@ -2,6 +2,17 @@
 
 namespace App\Providers;
 
+use Domain\Player\Events\NewPlayersDetectedEvent;
+use Domain\Player\Listeners\NewPlayersDetectedListener;
+use Domain\Player\Listeners\PlayersJoinedListener;
+use Domain\Presence\Listeners\PlayersIdentifiedListener;
+use Domain\Presence\Listeners\ServerScannedListener;
+use Domain\Shared\Events\PlayersIdentifiedEvent;
+use Domain\Shared\Events\PlayersJoinedEvent;
+use Domain\Shared\Events\PlayersLeftEvent;
+use Domain\Shared\Events\ServerScannedEvent;
+use Domain\Subscription\Listeners\PlayersLeftListener;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -22,6 +33,29 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Event::listen(
+            ServerScannedEvent::class,
+            ServerScannedListener::class
+        );
+
+        Event::listen(
+            PlayersJoinedEvent::class,
+            PlayersJoinedListener::class
+        );
+
+        Event::listen(
+            PlayersLeftEvent::class,
+            PlayersLeftListener::class
+        );
+
+        Event::listen(
+            NewPlayersDetectedEvent::class,
+            NewPlayersDetectedListener::class
+        );
+
+        Event::listen(
+            PlayersIdentifiedEvent::class,
+            PlayersIdentifiedListener::class
+        );
     }
 }

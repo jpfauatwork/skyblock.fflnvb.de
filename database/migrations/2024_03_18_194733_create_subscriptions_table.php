@@ -11,18 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('daily_player_presences', function (Blueprint $table) {
+        Schema::create('subscriptions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('player_id');
-            $table->dateTime('date');
-            $table->integer('playtime_minutes');
+            $table->string('event_name');
+            $table->foreignId('context_player_id')->nullable();
+            $table->string('context_player_name')->nullable();
+            $table->string('via_telegram')->nullable();
             $table->datetimes();
             $table->softDeletesDateTime();
 
-            $table->index('player_id');
-            $table->index('date');
-
-            $table->unique(['player_id', 'date']);
+            $table->index('event_name');
+            $table->index('context_player_id');
         });
     }
 
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('daily_player_presences');
+        Schema::dropIfExists('presence_subscriptions');
     }
 };

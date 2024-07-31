@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('presences', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('player_id')->constrained('players');
+            $table->foreignId('player_id')->nullable();
+            $table->string('name');
             $table->dateTime('joined_at');
             $table->dateTime('left_at')->nullable();
             $table->datetimes();
@@ -22,6 +23,7 @@ return new class extends Migration
             $table->index('joined_at');
             $table->index('left_at');
             $table->index('player_id');
+            $table->index('name');
         });
     }
 

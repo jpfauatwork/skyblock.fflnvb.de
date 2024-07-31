@@ -2,8 +2,7 @@
 
 namespace Database\Factories;
 
-use Domain\Presence\Models\Player;
-use Domain\Presence\States\Player\Registered;
+use Domain\Player\Models\Player;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -28,10 +27,8 @@ class PlayerFactory extends Factory
         return [
             'mojang_id' => $this->faker->uuid(),
             'name' => $this->faker->name(),
-            'aliases' => null,
             'is_bedrock' => false,
-            'alt_from' => null,
-            'state' => Registered::$name,
+            'alt_of' => null,
         ];
     }
 }

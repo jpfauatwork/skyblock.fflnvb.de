@@ -6,7 +6,6 @@ use Database\Factories\PresenceFactory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 use Spatie\ModelStates\HasStates;
@@ -14,9 +13,13 @@ use Spatie\ModelStates\HasStates;
 /**
  * @property int $id
  * @property int $player_id
- * @property ?Carbon $joined_at
- * @property ?Carbon $left_at
+ * @property string $name
+ * @property Carbon|null $joined_at
+ * @property Carbon|null $left_at
  * @property int $playtime_minutes
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property Carbon|null $deleted_at
  */
 class Presence extends Model
 {
@@ -33,20 +36,11 @@ class Presence extends Model
 
     protected $fillable = [
         'player_id',
+        'name',
         'joined_at',
         'left_at',
         'playtime_minutes',
     ];
-
-    protected $casts = [
-        'joined_at' => 'datetime',
-        'left_at' => 'datetime',
-    ];
-
-    public function player(): BelongsTo
-    {
-        return $this->belongsTo(Player::class);
-    }
 
     public static function newFactory(): Factory
     {

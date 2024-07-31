@@ -30,7 +30,7 @@ class PlaygroundCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): void
     {
         $this->date = Carbon::parse($this->argument('date'));
 

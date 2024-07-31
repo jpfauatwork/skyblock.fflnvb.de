@@ -1,10 +1,8 @@
 <?php
 
-use App\Console\Commands\NotifyPresenceSubscriptionsCommand;
 use App\Console\Commands\RegisterPlayersCommand;
-use App\Console\Commands\RegisterPresencesCommand;
+use App\Console\Commands\ScanSkyblockServerCommand;
 use Illuminate\Support\Facades\Schedule;
 
-Schedule::command(RegisterPresencesCommand::class)->everyMinute();
-Schedule::command(NotifyPresenceSubscriptionsCommand::class)->everyFiveMinutes();
+Schedule::command(ScanSkyblockServerCommand::class)->everyMinute();
 Schedule::command(RegisterPlayersCommand::class)->everyThreeMinutes();

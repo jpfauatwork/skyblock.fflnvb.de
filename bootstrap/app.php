@@ -2,10 +2,8 @@
 
 use App\Application;
 use App\Console\Commands\CalculatePlaytimeCommand;
-use App\Console\Commands\NotifyPresenceSubscriptionsCommand;
 use App\Console\Commands\PlaygroundCommand;
-use App\Console\Commands\RegisterPlayersCommand;
-use App\Console\Commands\RegisterPresencesCommand;
+use App\Console\Commands\ScanSkyblockServerCommand;
 use App\Console\Commands\Tmp\FixFullDaysCommand;
 use App\Console\Commands\Tmp\SplitPresencesPerDayCommand;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -24,13 +22,11 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withExceptions(function (Exceptions $exceptions) {
         //
     })
-    ->withCommands([
+    ->withCommands(commands: [
         __DIR__.'/../src/App/Console/Commands',
-        RegisterPresencesCommand::class,
-        RegisterPlayersCommand::class,
+        ScanSkyblockServerCommand::class,
         CalculatePlaytimeCommand::class,
         SplitPresencesPerDayCommand::class,
-        NotifyPresenceSubscriptionsCommand::class,
         SplitPresencesPerDayCommand::class,
         PlaygroundCommand::class,
         FixFullDaysCommand::class,
