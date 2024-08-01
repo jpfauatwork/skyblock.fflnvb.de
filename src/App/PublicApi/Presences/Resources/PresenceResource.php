@@ -20,7 +20,7 @@ class PresenceResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->player->name,
+            'name' => $this->name,
             'joined_at' => $this->joined_at,
             'left_at' => $this->left_at,
         ];

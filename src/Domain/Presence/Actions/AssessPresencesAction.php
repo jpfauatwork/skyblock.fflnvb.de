@@ -93,18 +93,19 @@ class AssessPresencesAction
             ->where('joined_at', '<', now()->startOfDay())
             ->whereNull('left_at');
 
+        $reopenedPresences = $toBeReopenedEntries->get()
+            ->map(fn (Presence $presence) => [
+                'player_id' => $presence->player_id,
+                'name' => $presence->name,
+                'joined_at' => now()->startOfDay(),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ])
+            ->toArray();
+
         $toBeReopenedEntries->update([
             'left_at' => now()->yesterday()->endOfDay(),
         ]);
-
-        $reopenedPresences = $toBeReopenedEntries->map(fn (Presence $presence) => [
-            'player_id' => $presence->player_id,
-            'name' => $presence->name,
-            'joined_at' => now()->startOfDay(),
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]
-        );
 
         Presence::query()->insert($reopenedPresences);
     }

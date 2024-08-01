@@ -3,7 +3,6 @@
 namespace Domain\Presence\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 use Spatie\ModelStates\HasStates;
@@ -32,9 +31,4 @@ class DailyPlayerPresence extends Model
     protected $casts = [
         'date' => 'datetime',
     ];
-
-    public function player(): BelongsTo
-    {
-        return $this->belongsTo(Player::class);
-    }
 }

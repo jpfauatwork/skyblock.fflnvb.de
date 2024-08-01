@@ -15,6 +15,10 @@ use Illuminate\Support\Collection;
  */
 class IdentifyPlayersAction
 {
+    protected Collection $names;
+
+    protected EloquentCollection $identifiedPlayers;
+
     public function execute(Collection $names): void
     {
         $this->names = $names;

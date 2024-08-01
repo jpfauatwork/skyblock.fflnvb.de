@@ -7,12 +7,11 @@ use Domain\Subscription\Enums\EventNames;
 use Domain\Subscription\Models\Subscription;
 use Domain\Subscription\Notifications\PlayerLeftNotification;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
-use Illuminate\Notifications\Notification;
 use Illuminate\Support\Collection;
 
 /**
  * @property Collection<int, PresenceData> $presenceDataCollection
- * @property EloquentCollection<int, Notification> $subscriptionsToBeAssessed
+ * @property EloquentCollection<int, Subscription> $subscriptionsToBeAssessed
  */
 class AssessSubscriptionsAction
 {
@@ -20,7 +19,7 @@ class AssessSubscriptionsAction
 
     protected EloquentCollection $subscriptionsToBeAssessed;
 
-    /** @var Collection<int, PresenceDataCollection> */
+    /** @param Collection<int, PresenceData> $presenceDataCollection */
     public function execute(Collection $presenceDataCollection): void
     {
         $this->presenceDataCollection = $presenceDataCollection;

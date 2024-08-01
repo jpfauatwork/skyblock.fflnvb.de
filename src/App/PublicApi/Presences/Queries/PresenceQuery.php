@@ -23,14 +23,13 @@ class PresenceQuery extends QueryBuilder
 
     protected function query(): Builder
     {
-        return Presence::query()
-            ->with('player');
+        return Presence::query();
     }
 
     protected function filters(): self
     {
         return $this->allowedFilters([
-            AllowedFilter::partial('name', 'player.name'),
+            AllowedFilter::partial('name', 'name'),
             AllowedFilter::custom('joined_before', new LowerThanFilter, 'joined_at'),
             AllowedFilter::custom('joined_after', new GreaterThanFilter, 'joined_at'),
             AllowedFilter::custom('left_before', new LowerThanFilter, 'left_at'),

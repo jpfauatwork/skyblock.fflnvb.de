@@ -14,7 +14,7 @@ class SubscriptionFactory extends Factory
     /**
      * The name of the factory's corresponding model.
      *
-     * @var class-string<Presence>
+     * @var class-string<Subscription>
      */
     protected $model = Subscription::class;
 

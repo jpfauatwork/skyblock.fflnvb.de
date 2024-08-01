@@ -11,6 +11,10 @@ class PlayerLeftNotification extends Notification
 {
     use Queueable;
 
+    public function __construct(
+        public Subscription $subscription
+    ) {}
+
     /**
      * Get the notification's delivery channels.
      *
