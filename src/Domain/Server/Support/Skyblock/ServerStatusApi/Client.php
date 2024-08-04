@@ -47,7 +47,7 @@ class Client
                 ]
             );
 
-        logger($request);
+        logger('Status insight '.$request->status());
 
         return $request->json();
     }
