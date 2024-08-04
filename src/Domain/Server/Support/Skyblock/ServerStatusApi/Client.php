@@ -47,6 +47,8 @@ class Client
                 ]
             );
 
+        logger($request);
+
         return $request->json();
     }
 
