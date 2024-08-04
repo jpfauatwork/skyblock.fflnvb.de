@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('name');
             $table->boolean('is_bedrock')->nullable();
             $table->foreignId('alt_of')->nullable();
-            $table->dateTime('joined_at')->nullable();
             $table->uuid('registering_uuid')->nullable();
             $table->datetimes();
             $table->softDeletesDatetime();
