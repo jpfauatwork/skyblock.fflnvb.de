@@ -33,6 +33,7 @@ class EventGroup extends Model
     protected $fillable = [
         'name',
         'description',
+        'order_column',
     ];
 
     public function events(): HasMany
