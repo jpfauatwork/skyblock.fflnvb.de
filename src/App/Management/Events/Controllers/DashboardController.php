@@ -19,6 +19,6 @@ class DashboardController
             ->orderBy('occured_at', 'desc')
             ->get();
 
-        return view('management.dashboard', compact('eventGroups', 'events'));
+        return view('management.event.dashboard', compact('eventGroups', 'events'));
     }
 }

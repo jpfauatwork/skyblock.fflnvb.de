@@ -36,6 +36,7 @@ class Collectible extends Model
     protected $table = 'collectibles';
 
     protected $fillable = [
+        'event_id',
         'type',
         'name',
         'lore',

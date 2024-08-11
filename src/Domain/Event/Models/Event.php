@@ -34,6 +34,7 @@ class Event extends Model
     protected $table = 'events';
 
     protected $fillable = [
+        'event_group_id',
         'name',
         'description',
         'occured_at',
