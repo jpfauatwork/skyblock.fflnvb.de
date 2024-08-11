@@ -4,6 +4,7 @@ use App\Application;
 use App\Console\Commands\CalculatePlaytimeCommand;
 use App\Console\Commands\PlaygroundCommand;
 use App\Console\Commands\ScanSkyblockServerCommand;
+use App\Console\Commands\Tmp\CreateAdminCommand;
 use App\Console\Commands\Tmp\FixFullDaysCommand;
 use App\Console\Commands\Tmp\SplitPresencesPerDayCommand;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -30,5 +31,6 @@ return Application::configure(basePath: dirname(__DIR__))
         SplitPresencesPerDayCommand::class,
         PlaygroundCommand::class,
         FixFullDaysCommand::class,
+        CreateAdminCommand::class,
     ])
     ->create();
