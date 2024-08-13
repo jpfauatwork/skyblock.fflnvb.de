@@ -9,7 +9,7 @@
             <button class="btn btn-sm btn-outline-danger" type="submit"><x-bi-trash /></button>
         </form>
         @if($collectible->collected_at)
-            <span class="badge rounded-pill text-bg-success">Collected</span>
+            <x-bi-check-lg style="color: var(--bs-success);" />
         @endif
     </div>
 </li>
