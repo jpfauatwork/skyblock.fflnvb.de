@@ -3,7 +3,7 @@
 @section('title', 'Events')
 
 @section('content')
-    <h1 class="display-2">Rares</h1>
+    <h1 class="display-2 mt-3">Rares</h1>
     <p class='lead'>Overview of collectibles to be obtained</p>
     <h2>Collectibles by Events</h2>
     <div class="row">
