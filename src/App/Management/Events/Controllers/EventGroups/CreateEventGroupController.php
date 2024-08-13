@@ -6,6 +6,6 @@ class CreateEventGroupController
 {
     public function __invoke()
     {
-        return view('management.event.groups.create');
+        return view('management.rares.groups.create');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Event\Enums;
+namespace Domain\Rares\Enums;
 
 enum CollectibleTypeEnum: string
 {

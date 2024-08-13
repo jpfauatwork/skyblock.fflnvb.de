@@ -3,9 +3,9 @@
 namespace App\Management\Events\Controllers\Collectibles;
 
 use App\Management\Events\Requests\StoreCollectibleRequest;
-use Domain\Event\Actions\Collectibles\CreateCollectibleAction;
-use Domain\Event\Data\CollectibleData;
-use Domain\Event\Models\Event;
+use Domain\Rares\Actions\Collectibles\CreateCollectibleAction;
+use Domain\Rares\Data\CollectibleData;
+use Domain\Rares\Models\Event;
 use Exception;
 
 class StoreCollectibleController
@@ -19,6 +19,6 @@ class StoreCollectibleController
             return back()->withErrors([$e->getMessage()]);
         }
 
-        return redirect()->route('management.events.index');
+        return redirect()->route('management.rares.index');
     }
 }

@@ -2,8 +2,8 @@
 
 namespace App\Management\Events\Controllers;
 
-use Domain\Event\Models\Event;
-use Domain\Event\Models\EventGroup;
+use Domain\Rares\Models\Event;
+use Domain\Rares\Models\EventGroup;
 
 class DashboardController
 {
@@ -19,6 +19,6 @@ class DashboardController
             ->orderBy('occured_at', 'desc')
             ->get();
 
-        return view('management.event.dashboard', compact('eventGroups', 'events'));
+        return view('management.rares.dashboard', compact('eventGroups', 'events'));
     }
 }

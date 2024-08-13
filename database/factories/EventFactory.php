@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use Domain\Event\Models\Event;
+use Domain\Rares\Models\Event;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

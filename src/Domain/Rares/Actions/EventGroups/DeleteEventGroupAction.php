@@ -1,8 +1,8 @@
 <?php
 
-namespace Domain\Event\Actions\EventGroups;
+namespace Domain\Rares\Actions\EventGroups;
 
-use Domain\Event\Models\EventGroup;
+use Domain\Rares\Models\EventGroup;
 use Exception;
 
 class DeleteEventGroupAction

@@ -2,8 +2,8 @@
 
 namespace App\Management\Events\Controllers\Collectibles;
 
-use Domain\Event\Actions\Collectibles\DeleteCollectibleAction;
-use Domain\Event\Models\Collectible;
+use Domain\Rares\Actions\Collectibles\DeleteCollectibleAction;
+use Domain\Rares\Models\Collectible;
 use Exception;
 
 class DeleteCollectibleController
@@ -16,6 +16,6 @@ class DeleteCollectibleController
             return back()->withErrors([$e->getMessage()]);
         }
 
-        return redirect()->route('management.events.index');
+        return redirect()->route('management.rares.index');
     }
 }

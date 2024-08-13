@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Event\Data;
+namespace Domain\Rares\Data;
 
 use Carbon\Carbon;
 use Spatie\LaravelData\Attributes\MapName;

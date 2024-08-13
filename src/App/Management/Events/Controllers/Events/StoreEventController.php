@@ -3,9 +3,9 @@
 namespace App\Management\Events\Controllers\Events;
 
 use App\Management\Events\Requests\StoreEventRequest;
-use Domain\Event\Actions\Events\CreateEventAction;
-use Domain\Event\Data\EventData;
-use Domain\Event\Models\EventGroup;
+use Domain\Rares\Actions\Events\CreateEventAction;
+use Domain\Rares\Data\EventData;
+use Domain\Rares\Models\EventGroup;
 use Exception;
 
 class StoreEventController
@@ -19,6 +19,6 @@ class StoreEventController
             return back()->withErrors([$e->getMessage()]);
         }
 
-        return redirect()->route('management.events.index');
+        return redirect()->route('management.rares.index');
     }
 }

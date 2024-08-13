@@ -2,8 +2,8 @@
 
 namespace App\Management\Events\Controllers\Events;
 
-use Domain\Event\Actions\Events\DeleteEventAction;
-use Domain\Event\Models\Event;
+use Domain\Rares\Actions\Events\DeleteEventAction;
+use Domain\Rares\Models\Event;
 use Exception;
 
 class DeleteEventController
@@ -16,6 +16,6 @@ class DeleteEventController
             return back()->withErrors([$e->getMessage()]);
         }
 
-        return redirect()->route('management.events.index');
+        return redirect()->route('management.rares.index');
     }
 }

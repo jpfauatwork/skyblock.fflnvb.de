@@ -3,8 +3,8 @@
 namespace App\Management\Events\Controllers\EventGroups;
 
 use App\Management\Events\Requests\StoreEventGroupRequest;
-use Domain\Event\Actions\EventGroups\CreateEventGroupAction;
-use Domain\Event\Data\EventGroupData;
+use Domain\Rares\Actions\EventGroups\CreateEventGroupAction;
+use Domain\Rares\Data\EventGroupData;
 use Exception;
 
 class StoreEventGroupController
@@ -18,6 +18,6 @@ class StoreEventGroupController
             return back()->withErrors([$e->getMessage()]);
         }
 
-        return redirect()->route('management.events.index');
+        return redirect()->route('management.rares.index');
     }
 }

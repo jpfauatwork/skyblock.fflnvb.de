@@ -1,9 +1,9 @@
 <?php
 
-namespace Domain\Event\Models;
+namespace Domain\Rares\Models;
 
 use Database\Factories\CollectibleFactory;
-use Domain\Event\Enums\CollectibleTypeEnum;
+use Domain\Rares\Enums\CollectibleTypeEnum;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

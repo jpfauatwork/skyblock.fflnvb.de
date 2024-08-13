@@ -1,10 +1,10 @@
 <?php
 
-namespace Domain\Event\Actions\Events;
+namespace Domain\Rares\Actions\Events;
 
-use Domain\Event\Data\EventData;
-use Domain\Event\Models\Event;
-use Domain\Event\Models\EventGroup;
+use Domain\Rares\Data\EventData;
+use Domain\Rares\Models\Event;
+use Domain\Rares\Models\EventGroup;
 
 class CreateEventAction
 {

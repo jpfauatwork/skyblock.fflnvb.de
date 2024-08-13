@@ -3,10 +3,10 @@
 @section('title', 'Create Event Group')
 
 @section('content')
-    <h1 class="display-1">Events <small class="text-body-secondary"> & Collectibles</small></h1>
+    <h1 class="display-1">Rares</h1>
     <p class='lead'>Create a new Event Group</p>
     <h2>Form</h2>
-    <form method="POST" action="{{ route('management.events.groups.store') }}">
+    <form method="POST" action="{{ route('management.rares.groups.store') }}">
         @csrf
         <div class="mb-3">
             <label for="name" class="form-label">Event Group Name</label>

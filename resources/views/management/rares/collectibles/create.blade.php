@@ -3,10 +3,10 @@
 @section('title', 'Create Collectible')
 
 @section('content')
-    <h1 class="display-1">Events <small class="text-body-secondary"> & Collectibles</small></h1>
+    <h1 class="display-1">Rares</h1>
     <p class='lead'>Create a new Collectible for {{ $event->name }}</p>
     <h2>Form</h2>
-    <form method="POST" action="{{ route('management.events.collectibles.store', $event) }}">
+    <form method="POST" action="{{ route('management.rares.collectibles.store', $event) }}">
         @csrf
         <div class="mb-3">
             <label for="type" class="form-label">Type</label>

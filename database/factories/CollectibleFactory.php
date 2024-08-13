@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use Domain\Event\Enums\CollectibleTypeEnum;
-use Domain\Event\Models\Collectible;
+use Domain\Rares\Enums\CollectibleTypeEnum;
+use Domain\Rares\Models\Collectible;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

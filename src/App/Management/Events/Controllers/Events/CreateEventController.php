@@ -2,12 +2,12 @@
 
 namespace App\Management\Events\Controllers\Events;
 
-use Domain\Event\Models\EventGroup;
+use Domain\Rares\Models\EventGroup;
 
 class CreateEventController
 {
     public function __invoke(EventGroup $eventGroup)
     {
-        return view('management.event.events.create', compact('eventGroup'));
+        return view('management.rares.events.create', compact('eventGroup'));
     }
 }

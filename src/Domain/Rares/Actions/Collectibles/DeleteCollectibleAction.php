@@ -1,8 +1,8 @@
 <?php
 
-namespace Domain\Event\Actions\Collectibles;
+namespace Domain\Rares\Actions\Collectibles;
 
-use Domain\Event\Models\Collectible;
+use Domain\Rares\Models\Collectible;
 
 class DeleteCollectibleAction
 {

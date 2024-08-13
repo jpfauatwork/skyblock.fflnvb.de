@@ -1,27 +1,24 @@
 <?php
 
-namespace Domain\Event\Models;
+namespace Domain\Rares\Models;
 
-use Database\Factories\EventFactory;
+use Database\Factories\EventGroupFactory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
- * @property int $event_group_id
  * @property string $name
  * @property string|null $description
- * @property Carbon $occured_at
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
  */
-class Event extends Model
+class EventGroup extends Model
 {
     use HasFactory;
     use SoftDeletes;
@@ -31,31 +28,21 @@ class Event extends Model
      *
      * @var string
      */
-    protected $table = 'events';
+    protected $table = 'event_groups';
 
     protected $fillable = [
-        'event_group_id',
         'name',
         'description',
-        'occured_at',
+        'order_column',
     ];
 
-    protected $casts = [
-        'occured_at' => 'datetime',
-    ];
-
-    public function eventGroup(): BelongsTo
+    public function events(): HasMany
     {
-        return $this->belongsTo(EventGroup::class);
-    }
-
-    public function collectibles(): HasMany
-    {
-        return $this->hasMany(Collectible::class);
+        return $this->hasMany(Event::class);
     }
 
     public static function newFactory(): Factory
     {
-        return EventFactory::new();
+        return EventGroupFactory::new();
     }
 }

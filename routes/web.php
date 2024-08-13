@@ -38,8 +38,8 @@ Route::prefix('management')
         'auth.basic',
     ])
     ->group(function () {
-        Route::prefix('events')
-            ->name('events.')
+        Route::prefix('rares')
+            ->name('rares.')
             ->group(function () {
                 Route::get('/', DashboardController::class)->name('index');
                 Route::prefix('groups')

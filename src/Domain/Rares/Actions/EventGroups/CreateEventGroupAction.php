@@ -1,9 +1,9 @@
 <?php
 
-namespace Domain\Event\Actions\EventGroups;
+namespace Domain\Rares\Actions\EventGroups;
 
-use Domain\Event\Data\EventGroupData;
-use Domain\Event\Models\EventGroup;
+use Domain\Rares\Data\EventGroupData;
+use Domain\Rares\Models\EventGroup;
 
 class CreateEventGroupAction
 {

@@ -2,8 +2,8 @@
 
 namespace App\Management\Events\Controllers\EventGroups;
 
-use Domain\Event\Actions\EventGroups\DeleteEventGroupAction;
-use Domain\Event\Models\EventGroup;
+use Domain\Rares\Actions\EventGroups\DeleteEventGroupAction;
+use Domain\Rares\Models\EventGroup;
 use Exception;
 
 class DeleteEventGroupController
@@ -16,6 +16,6 @@ class DeleteEventGroupController
             return back()->withErrors([$e->getMessage()]);
         }
 
-        return redirect()->route('management.events.index');
+        return redirect()->route('management.rares.index');
     }
 }

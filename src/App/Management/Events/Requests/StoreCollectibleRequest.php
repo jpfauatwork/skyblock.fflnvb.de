@@ -2,7 +2,7 @@
 
 namespace App\Management\Events\Requests;
 
-use Domain\Event\Enums\CollectibleTypeEnum;
+use Domain\Rares\Enums\CollectibleTypeEnum;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 

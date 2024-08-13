@@ -1,8 +1,8 @@
 <?php
 
-namespace Domain\Event\Actions\Events;
+namespace Domain\Rares\Actions\Events;
 
-use Domain\Event\Models\Event;
+use Domain\Rares\Models\Event;
 use Exception;
 
 class DeleteEventAction

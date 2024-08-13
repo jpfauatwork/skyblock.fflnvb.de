@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use Domain\Event\Enums\CollectibleTypeEnum;
-use Domain\Event\Models\Collectible;
-use Domain\Event\Models\Event;
-use Domain\Event\Models\EventGroup;
+use Domain\Rares\Enums\CollectibleTypeEnum;
+use Domain\Rares\Models\Collectible;
+use Domain\Rares\Models\Event;
+use Domain\Rares\Models\EventGroup;
 use Illuminate\Database\Seeder;
 
 class EventSeeder extends Seeder
