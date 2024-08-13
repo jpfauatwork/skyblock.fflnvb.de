@@ -1,1 +1,12 @@
 @import 'bootstrap/scss/bootstrap';
+
+.hoverable {
+    .action {
+        visibility: hidden;
+    }
+    &:hover {
+        .action {
+            visibility: visible;
+        }
+    }
+}
