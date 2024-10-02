@@ -2,28 +2,26 @@
 
 namespace Domain\Rares\Models;
 
-use Database\Factories\CollectibleFactory;
-use Domain\Rares\Enums\CollectibleTypeEnum;
+use Database\Factories\TagFactory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
- * @property int $event_id
- * @property CollectibleTypeEnum $type
+ * @property int $event_group_id
  * @property string $name
- * @property string|null $lore
- * @property int $amount
- * @property Carbon|null $collected_at
+ * @property string|null $description
+ * @property Carbon $occured_at
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
  */
-class Collectible extends Model
+class Tag extends Model
 {
     use HasFactory;
     use SoftDeletes;
@@ -33,29 +31,31 @@ class Collectible extends Model
      *
      * @var string
      */
-    protected $table = 'collectibles';
+    protected $table = 'events';
 
     protected $fillable = [
-        'event_id',
-        'type',
+        'event_group_id',
         'name',
-        'lore',
-        'amount',
-        'collected_at',
+        'description',
+        'occured_at',
     ];
 
     protected $casts = [
-        'type' => CollectibleTypeEnum::class,
-        'collected_at' => 'datetime',
+        'occured_at' => 'datetime',
     ];
 
-    public function event(): BelongsTo
+    public function eventGroup(): BelongsTo
     {
-        return $this->belongsTo(Tag::class);
+        return $this->belongsTo(TagGroup::class);
+    }
+
+    public function collectibles(): HasMany
+    {
+        return $this->hasMany(Collectible::class);
     }
 
     public static function newFactory(): Factory
     {
-        return CollectibleFactory::new();
+        return TagFactory::new();
     }
 }

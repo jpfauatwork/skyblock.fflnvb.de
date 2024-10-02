@@ -1,15 +1,15 @@
 <?php
 
-use App\Management\Events\Controllers\Collectibles\CreateCollectibleController;
-use App\Management\Events\Controllers\Collectibles\DeleteCollectibleController;
-use App\Management\Events\Controllers\Collectibles\StoreCollectibleController;
-use App\Management\Events\Controllers\DashboardController;
-use App\Management\Events\Controllers\EventGroups\CreateEventGroupController;
-use App\Management\Events\Controllers\EventGroups\DeleteEventGroupController;
-use App\Management\Events\Controllers\EventGroups\StoreEventGroupController;
-use App\Management\Events\Controllers\Events\CreateEventController;
-use App\Management\Events\Controllers\Events\DeleteEventController;
-use App\Management\Events\Controllers\Events\StoreEventController;
+use App\Management\Rares\Controllers\Collectibles\CreateCollectibleController;
+use App\Management\Rares\Controllers\Collectibles\DeleteCollectibleController;
+use App\Management\Rares\Controllers\Collectibles\StoreCollectibleController;
+use App\Management\Rares\Controllers\DashboardController;
+use App\Management\Rares\Controllers\TagGroups\CreateTagGroupController;
+use App\Management\Rares\Controllers\TagGroups\DeleteTagGroupController;
+use App\Management\Rares\Controllers\TagGroups\StoreTagGroupController;
+use App\Management\Rares\Controllers\Tags\CreateTagController;
+use App\Management\Rares\Controllers\Tags\DeleteTagController;
+use App\Management\Rares\Controllers\Tags\StoreTagController;
 use App\PublicApi\Playground\Controllers\PlaygroundController;
 use App\PublicApi\Presences\Controllers\ListPresencesController;
 use Illuminate\Support\Facades\Route;
@@ -17,8 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::redirect('/presences/recent', '/public-api/presences');
 
 Route::prefix('public-api')
     ->name('public-api.')
@@ -42,25 +40,25 @@ Route::prefix('management')
             ->name('rares.')
             ->group(function () {
                 Route::get('/', DashboardController::class)->name('index');
-                Route::prefix('groups')
-                    ->name('groups.')
+                Route::prefix('tag-groups')
+                    ->name('tag-groups.')
                     ->group(function () {
-                        Route::get('create', CreateEventGroupController::class)->name('create');
-                        Route::post('store', StoreEventGroupController::class)->name('store');
-                        Route::delete('{eventGroup}', DeleteEventGroupController::class)->name('delete');
+                        Route::get('create', CreateTagGroupController::class)->name('create');
+                        Route::post('store', StoreTagGroupController::class)->name('store');
+                        Route::delete('{tagGroup}', DeleteTagGroupController::class)->name('delete');
                     });
-                Route::prefix('events')
-                    ->name('events.')
+                Route::prefix('tags')
+                    ->name('tags.')
                     ->group(function () {
-                        Route::get('{eventGroup}/create', CreateEventController::class)->name('create');
-                        Route::post('{eventGroup}/store', StoreEventController::class)->name('store');
-                        Route::delete('{event}', DeleteEventController::class)->name('delete');
+                        Route::get('{tagGroup}/create', CreateTagController::class)->name('create');
+                        Route::post('{tagGroup}/store', StoreTagController::class)->name('store');
+                        Route::delete('{tag}', DeleteTagController::class)->name('delete');
                     });
                 Route::prefix('collectibles')
                     ->name('collectibles.')
                     ->group(function () {
-                        Route::get('{event}/create', CreateCollectibleController::class)->name('create');
-                        Route::post('{event}/store', StoreCollectibleController::class)->name('store');
+                        Route::get('{tag}/create', CreateCollectibleController::class)->name('create');
+                        Route::post('{tag}/store', StoreCollectibleController::class)->name('store');
                         Route::delete('{collectible}', DeleteCollectibleController::class)->name('delete');
                     });
             });

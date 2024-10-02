@@ -15,10 +15,10 @@
     </div>
     <h2>
         Manage Event Groups
-        <a role="button" class="btn btn-sm btn-outline-secondary" href="{{ route('management.rares.groups.create') }}">Add Group</a>
+        <a role="button" class="btn btn-sm btn-outline-secondary" href="{{ route('management.rares.tag-groups.create') }}">Add Group</a>
     </h2>
     <div class="row">
-    @foreach ($eventGroups as $eventGroup)
+    @foreach ($tagGroups as $tagGroup)
         <div class="col-12 col-lg-6 col-xl-4 mb-4">
             @include('management.rares.components.group.card')
         </div>
