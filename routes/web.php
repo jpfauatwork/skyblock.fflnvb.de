@@ -3,7 +3,7 @@
 use App\Management\Rares\Controllers\Collectibles\CreateCollectibleController;
 use App\Management\Rares\Controllers\Collectibles\DeleteCollectibleController;
 use App\Management\Rares\Controllers\Collectibles\StoreCollectibleController;
-use App\Management\Rares\Controllers\DashboardController;
+use App\Management\Rares\Controllers\RaresController;
 use App\Management\Rares\Controllers\TagGroups\CreateTagGroupController;
 use App\Management\Rares\Controllers\TagGroups\DeleteTagGroupController;
 use App\Management\Rares\Controllers\TagGroups\StoreTagGroupController;
@@ -32,14 +32,14 @@ Route::prefix('public-api')
 
 Route::prefix('management')
     ->name('management.')
-    ->middleware([
-        'auth.basic',
-    ])
+    // ->middleware([
+    //     'auth.basic',
+    // ])
     ->group(function () {
         Route::prefix('rares')
             ->name('rares.')
             ->group(function () {
-                Route::get('/', DashboardController::class)->name('index');
+                Route::get('/', RaresController::class)->name('index');
                 Route::prefix('tag-groups')
                     ->name('tag-groups.')
                     ->group(function () {

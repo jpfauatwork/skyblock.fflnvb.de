@@ -1,12 +1,226 @@
-@import 'bootstrap/scss/bootstrap';
-
-.hoverable {
-    .action {
-        visibility: hidden;
+$primary: #303437;
+$secondary: #404447;
+$tertiary: #ebecec;
+body {
+    margin: 40px 0;
+    font: 18px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
+        sans-serif;
+    color: $tertiary;
+    background: $primary
+}
+.content {
+    margin: 0 auto 1em auto;
+    padding: 0 15px;
+    max-width: 650px;
+    h3 {
+        border-bottom: solid 1px $tertiary;
+        display: inline-block;
     }
-    &:hover {
-        .action {
-            visibility: visible;
+}
+.headlist {
+    margin: 0 auto;
+    text-align: center;
+    padding: 0;
+
+    .date {
+        font-weight: bold;
+        text-transform: uppercase;
+        margin-bottom: -1.3em;
+    }
+    p {
+        text-align: center;
+    }
+    img {
+        max-width: 800px;
+    }
+}
+.brand {
+    font-size: 2em;
+}
+
+nav{
+    ul {
+        margin: 0;
+        padding: 5px;
+        margin: 15px 0;
+        list-style-type: none;
+        text-align: center;
+        li {
+            display: inline;
+            a {
+                text-decoration: none;
+                padding: .2em 1em;
+                color: $tertiary !important;
+            }
+        }
+    }
+}
+h1,
+h2,
+h3 {
+    line-height: 1.2;
+}
+p {
+    text-align: justify;
+}
+
+a:link {
+    color: #5bf
+}
+
+a:visited {
+    color: #ccf
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(10em, 1fr));
+    grid-auto-rows: 1fr;
+    column-gap: 10px;
+    row-gap: 15px
+}
+.item {
+    a {
+        color: #ccc !important;
+        text-decoration: inherit;
+    }
+}
+
+article {
+    .tile {
+        height: 130px;
+        background-color: $secondary;
+        border-radius: 5px;
+        background-position: center;
+        background-size: 4em, auto;
+        background-repeat: no-repeat;
+        &.bike {
+            background-image: url(/img/svg/bike3.svg);
+        }
+        &.code {
+            background-image: url(/img/svg/code3.svg);
+        }
+        &.internet {
+            background-image: url(/img/svg/internet3.svg);
+        }
+        &.plants {
+            background-image: url(/img/svg/plants3.svg);
+        }
+        &.running {
+            background-image: url(/img/svg/running3.svg);
+        }
+
+        &.compact {
+            height: 70px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: $tertiary;
+            h3 {
+                margin: 0;
+            }
+        }
+    }
+    .date {
+        margin-top: 16px;
+        font-size: 13px;
+    }
+    .subtitle {
+        font-weight: bold;
+        font-size: 14px;
+        text-transform: uppercase;
+    }
+    h3 {
+        font-size: 18px;
+        margin-top: 10px;
+        border-bottom: none !important;
+    }
+    p {
+        font-size: 0.9em;
+    }
+}
+
+div.playlist{
+    display: flex;
+    align-items: center;
+    div.display {
+        float:left;
+        width: 35%;
+        overflow: hidden;
+        margin-right: 1em;
+
+        .cover{
+            width: 165px;
+            height: 165px;
+            overflow: hidden;
+        }
+
+
+        figure {
+            margin: 10px auto;
+            padding: 15px;
+            width: 165px;
+            border-radius: 5px;
+            background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+            color:$primary;
+
+            figcaption {
+                font-size: 0.8em;
+                font-weight: bold;
+            }
+            aside {
+                font-size: 0.6em;
+            }
+            img{
+                border-radius: 2px;
+            }
+        }
+    }
+
+    div.tracks {
+        float: left;
+        width: 60%;
+        font-size: 0.8em;
+        padding: 25px 0;
+    }
+    &::after{
+        display: block;
+        content: "";
+        clear: both;
+    }
+}
+
+img {
+    width: 100%;
+}
+
+div.runningSeason{
+    background-color: $secondary;
+    color: $tertiary;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    h3 {
+        margin-top: 3px;
+        display: block;
+        border-bottom: none !important;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    div.playlist {
+        display: block;
+        div.display {
+            float: none;
+            width: inherit;
+            margin-right: 0;
+        }
+
+        div.tracks {
+            float: none;
+            width: inherit;
+            margin: 10px;
+            padding: 0;
         }
     }
 }

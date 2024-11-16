@@ -13,11 +13,13 @@ return new class extends Migration
     {
         Schema::create('collectibles', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('event_id');
+            $table->foreignId('event_id')->nullable();
             $table->string('type');
             $table->string('name');
             $table->string('lore')->nullable();
+            $table->string('creator')->nullable();
             $table->integer('amount')->nullable();
+
             $table->dateTime('collected_at')->nullable();
 
             $table->datetimes();

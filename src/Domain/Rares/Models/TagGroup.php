@@ -28,7 +28,7 @@ class TagGroup extends Model
      *
      * @var string
      */
-    protected $table = 'event_groups';
+    protected $table = 'tag_groups';
 
     protected $fillable = [
         'name',
@@ -36,7 +36,7 @@ class TagGroup extends Model
         'order_column',
     ];
 
-    public function events(): HasMany
+    public function tags(): HasMany
     {
         return $this->hasMany(Tag::class);
     }

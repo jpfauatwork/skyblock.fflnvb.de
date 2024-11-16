@@ -5,7 +5,7 @@ namespace App\Management\Rares\Controllers;
 use Domain\Rares\Models\Tag;
 use Domain\Rares\Models\TagGroup;
 
-class DashboardController
+class RaresController
 {
     public function __invoke()
     {
@@ -25,6 +25,6 @@ class DashboardController
             ->orderBy('occured_at', 'desc')
             ->get();
 
-        return view('management.rares.dashboard', compact('tagGroups', 'tags'));
+        return view('management.rares.index', compact('tagGroups', 'tags'));
     }
 }
