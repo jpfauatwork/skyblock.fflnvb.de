@@ -2,8 +2,8 @@
 
 namespace Domain\Server\Actions;
 
-use Domain\Server\Support\Skyblock\Enums\SkyblockServerListEnum;
-use Domain\Server\Support\Skyblock\ServerStatusApi\Client;
+use Domain\Server\Support\Enums\Server;
+use Domain\Server\Support\QueryProtocol\Client;
 use Domain\Shared\Data\ServerStatusData;
 use Domain\Shared\Events\ServerScannedEvent;
 use Exception;
@@ -12,15 +12,15 @@ class ScanServerAction
 {
     protected ServerStatusData $serverStatusData;
 
-    public function execute(SkyblockServerListEnum $server): void
+    public function execute(Server $server): void
     {
         $this->getPlayerList($server);
         $this->dispatchEvent();
     }
 
-    protected function getPlayerList(SkyblockServerListEnum $server): void
+    protected function getPlayerList(Server $server): void
     {
-        $serverStatusRequest = app(Client::class)->post($server);
+        $serverStatusRequest = app(Client::class)->connect($server);
 
         if (! $serverStatusRequest->isSuccessful) {
             logger('Request failed: '.$serverStatusRequest->errorMessage);

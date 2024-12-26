@@ -1,8 +1,8 @@
 <?php
 
-use App\Console\Commands\ScanSkyblockServerCommand;
+use App\Console\Commands\ScanServerCommand;
 use Illuminate\Support\Facades\Schedule;
 
 if (env('SKYBLOCK_SERVER_SCAN_ENABLED', false)) {
-    Schedule::command(ScanSkyblockServerCommand::class, ['economy'])->everyMinute();
+    Schedule::command(ScanServerCommand::class, ['economy'])->everyMinute();
 }

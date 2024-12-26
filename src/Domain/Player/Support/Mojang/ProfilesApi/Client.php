@@ -69,7 +69,7 @@ class Client
         $count = $profiles->count();
 
         match (true) {
-            $count === 0 => throw new NoProfilesRequested(),
+            $count === 0 => throw new NoProfilesRequested,
             $count > 10 => throw new TooManyProfilesRequested($count),
             default => null,
         };

@@ -3,7 +3,7 @@
 use App\Application;
 use App\Console\Commands\CalculatePlaytimeCommand;
 use App\Console\Commands\PlaygroundCommand;
-use App\Console\Commands\ScanSkyblockServerCommand;
+use App\Console\Commands\ScanServerCommand;
 use App\Console\Commands\Tmp\CreateAdminCommand;
 use App\Console\Commands\Tmp\FixFullDaysCommand;
 use App\Console\Commands\Tmp\SplitPresencesPerDayCommand;
@@ -25,7 +25,7 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withCommands(commands: [
         __DIR__.'/../src/App/Console/Commands',
-        ScanSkyblockServerCommand::class,
+        ScanServerCommand::class,
         CalculatePlaytimeCommand::class,
         SplitPresencesPerDayCommand::class,
         SplitPresencesPerDayCommand::class,

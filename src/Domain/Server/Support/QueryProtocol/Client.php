@@ -1,13 +1,15 @@
 <?php
 
-namespace Domain\Server\Support\Skyblock\ServerStatusApi;
+namespace Domain\Server\Support\QueryProtocol;
 
-use Domain\Server\Support\Skyblock\Enums\SkyblockServerListEnum;
+use Domain\Server\Support\Enums\Server;
 use Domain\Shared\Data\ServerStatusData;
 use Exception;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
+use xPaw\MinecraftQuery;
+use xPaw\MinecraftQueryException;
 
 class Client
 {
@@ -17,8 +19,17 @@ class Client
 
     public string $errorMessage = 'No request sent';
 
-    public function post(SkyblockServerListEnum $server): self
+    private MinecraftQuery $connection;
+
+    public function connect(Server $server): self
     {
+        $this->connection = new MinecraftQuery;
+
+        try {
+            $this->connection->Connect('dev2.skyblock.net', 5235);
+        } catch (MinecraftQueryException $e) {
+            $this->errorMessage = $e->getMessage();
+        }
         try {
             $response = $this->sendRequest($server);
             $this->serverStatusData = ServerStatusData::from(Arr::get($response, 'serverStatus', []));
@@ -34,7 +45,7 @@ class Client
         return $this;
     }
 
-    protected function sendRequest(SkyblockServerListEnum $server): array
+    protected function sendRequest(Server $server): array
     {
         $request = Http::asForm()
             ->acceptJson()

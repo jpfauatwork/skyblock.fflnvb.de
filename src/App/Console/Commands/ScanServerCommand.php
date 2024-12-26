@@ -3,18 +3,18 @@
 namespace App\Console\Commands;
 
 use Domain\Server\Actions\ScanServerAction;
-use Domain\Server\Support\Skyblock\Enums\SkyblockServerListEnum;
+use Domain\Server\Support\Enums\Server;
 use Exception;
 use Illuminate\Console\Command;
 
-class ScanSkyblockServerCommand extends Command
+class ScanServerCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'skyblock:server:scan {server}';
+    protected $signature = 'servers:scan {server}';
 
     /**
      * The console command description.
@@ -29,7 +29,7 @@ class ScanSkyblockServerCommand extends Command
     public function handle(): void
     {
         $server = match ($this->argument('server')) {
-            'economy' => SkyblockServerListEnum::Economy,
+            'economy' => Server::SkyblockEconomy,
             default => throw new Exception('Invalid server id'),
         };
 
