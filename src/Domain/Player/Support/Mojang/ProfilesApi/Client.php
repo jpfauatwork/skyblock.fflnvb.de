@@ -5,9 +5,9 @@ namespace Domain\Player\Support\Mojang\ProfilesApi;
 use Domain\Player\Support\Mojang\Data\ProfileData;
 use Domain\Player\Support\Mojang\Exceptions\NoProfilesRequested;
 use Domain\Player\Support\Mojang\Exceptions\TooManyProfilesRequested;
-use Exception;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
+use Throwable;
 
 /** @property Collection<int, ProfileData> $profiles */
 class Client
@@ -29,9 +29,9 @@ class Client
             $response = $this->sendRequest($names);
 
             $this->profiles = ProfileData::collect($response, Collection::class);
-        } catch (Exception $e) {
+        } catch (Throwable $e) {
             $this->errorMessage = $e->getMessage();
-
+            $this->profiles = collect();
             return $this;
         }
 
