@@ -42,12 +42,12 @@ class AssessSubscriptionsAction
             ->where('event_name', EventNames::PLAYER_LEFT)
             ->each(function (Subscription $subscription) {
                 $matchingPresenceData = $this->presenceDataCollection
-                    ->filter(fn (PresenceData $presenceData) => $presenceData->playerId === $subscription->context_player_id
+                    ->filter(fn (PresenceData $presenceData) => $presenceData->player_id === $subscription->context_player_id
                             || $presenceData->name === $subscription->context_player_name
                     )
                     ->first();
 
-                if ($matchingPresenceData->leftAt) {
+                if ($matchingPresenceData->left_at) {
                     return;
                 }
 

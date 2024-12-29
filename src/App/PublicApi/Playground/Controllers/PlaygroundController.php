@@ -3,12 +3,12 @@
 namespace App\PublicApi\Playground\Controllers;
 
 use Domain\Server\Actions\ScanServerAction;
-use Domain\Server\Support\Skyblock\Enums\SkyblockServerListEnum;
+use Domain\Server\Support\Enums\Server;
 
 class PlaygroundController
 {
     public function __invoke()
     {
-        app(ScanServerAction::class)->execute(SkyblockServerListEnum::Economy);
+        app(ScanServerAction::class)->execute(Server::SkyblockEconomy);
     }
 }
