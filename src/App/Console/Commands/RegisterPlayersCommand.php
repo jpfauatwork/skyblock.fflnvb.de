@@ -29,8 +29,8 @@ class RegisterPlayersCommand extends Command
     {
         $unregisteredPlayers = Presence::query()
             ->whereNull('player_id')
-            ->where('created_at', '>', now()->subMinutes(10))
-            ->where('created_at', '<', now()->subDay())
+            ->where('created_at', '<', now()->subMinutes(10))
+            ->where('created_at', '>', now()->subDay())
             ->pluck('name')
             ->unique();
 
