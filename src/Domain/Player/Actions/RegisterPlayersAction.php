@@ -78,6 +78,10 @@ class RegisterPlayersAction
 
             $mojangProfilesRequest = app(Client::class)->post($profilesToBeRegistered);
 
+            if (! $mojangProfilesRequest->isSuccessful) {
+                return true;
+            }
+
             $profilesWithUuid = $mojangProfilesRequest->response();
 
             $insert = $profilesWithUuid
