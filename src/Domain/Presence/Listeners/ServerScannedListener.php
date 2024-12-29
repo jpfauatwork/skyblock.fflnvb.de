@@ -9,6 +9,6 @@ class ServerScannedListener
 {
     public function handle(ServerScannedEvent $event): void
     {
-        AssessPresencesJob::dispatch($event->serverStatusData->playerList);
+        AssessPresencesJob::dispatch($event->serverStatusData->players);
     }
 }

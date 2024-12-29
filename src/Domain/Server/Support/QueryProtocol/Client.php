@@ -17,7 +17,7 @@ class Client
 
     public bool $isSuccessful = false;
 
-    public string $errorMessage = 'No request sent';
+    public string $status = 'No request sent';
 
     private MinecraftQuery $connection;
 
@@ -27,40 +27,26 @@ class Client
 
         try {
             $this->connection->Connect('dev2.skyblock.net', 5235);
+
+            $serverInfo = $this->connection->GetInfo();
+            $players = $this->connection->GetPlayers();
+
+            $this->serverStatusData = ServerStatusData::from([
+                'online' => true,
+                'players_online' => Arr::get($serverInfo, 'Players'),
+                'max_players' => Arr::get($serverInfo, 'MaxPlayers'),
+                'players' => collect($players),
+            ]);
         } catch (MinecraftQueryException $e) {
-            $this->errorMessage = $e->getMessage();
-        }
-        try {
-            $response = $this->sendRequest($server);
-            $this->serverStatusData = ServerStatusData::from(Arr::get($response, 'serverStatus', []));
-        } catch (Exception $e) {
-            $this->errorMessage = $e->getMessage();
+            $this->status = $e->getMessage();
 
             return $this;
         }
 
-        $this->errorMessage = 'No errors';
+        $this->status = 'Request successful';
         $this->isSuccessful = true;
 
         return $this;
-    }
-
-    protected function sendRequest(Server $server): array
-    {
-        $request = Http::asForm()
-            ->acceptJson()
-            ->post(
-                Str::of(config('skyblock.server_status_url'))->replace('[server-id]', $server->value),
-                [
-                    '_xfResponseType' => 'json',
-                    '_xfRequestUri' => '/',
-                    '_xfNoRedirect' => '1',
-                ]
-            );
-
-        logger('Status insight '.$request->status(), ['reason' => $request->reason(), 'headers' => $request->headers(), 'body' => $request->body()]);
-
-        return $request->json();
     }
 
     public function response(): ?ServerStatusData

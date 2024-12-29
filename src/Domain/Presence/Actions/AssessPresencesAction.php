@@ -23,9 +23,9 @@ class AssessPresencesAction
 
     protected EloquentCollection $openPresences;
 
-    public function execute(array $playerNames): void
+    public function execute(Collection $playerNames): void
     {
-        $this->playerNames = collect($playerNames);
+        $this->playerNames = $playerNames;
 
         $this->collectOpenPresences();
         $this->registerNewPresences();

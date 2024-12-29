@@ -29,7 +29,7 @@ class ScanServerCommand extends Command
     public function handle(): void
     {
         $server = match ($this->argument('server')) {
-            'economy' => Server::SkyblockEconomy,
+            'skyblock-economy' => Server::SkyblockEconomy,
             default => throw new Exception('Invalid server id'),
         };
 

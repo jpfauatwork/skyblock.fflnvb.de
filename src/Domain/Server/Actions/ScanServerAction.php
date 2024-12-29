@@ -23,8 +23,8 @@ class ScanServerAction
         $serverStatusRequest = app(Client::class)->connect($server);
 
         if (! $serverStatusRequest->isSuccessful) {
-            logger('Request failed: '.$serverStatusRequest->errorMessage);
-            throw new Exception('Request failed: '.$serverStatusRequest->errorMessage);
+            logger('Request failed: '.$serverStatusRequest->status);
+            throw new Exception('Request failed: '.$serverStatusRequest->status);
         }
 
         $this->serverStatusData = $serverStatusRequest->response();
