@@ -32,6 +32,7 @@ class Client
         } catch (Throwable $e) {
             $this->errorMessage = $e->getMessage();
             $this->profiles = collect();
+
             return $this;
         }
 

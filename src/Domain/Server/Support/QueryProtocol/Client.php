@@ -4,10 +4,7 @@ namespace Domain\Server\Support\QueryProtocol;
 
 use Domain\Server\Support\Enums\Server;
 use Domain\Shared\Data\ServerStatusData;
-use Exception;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Str;
 use xPaw\MinecraftQuery;
 use xPaw\MinecraftQueryException;
 
