@@ -1,0 +1,23 @@
+meta {
+  name: GET Profiles
+  type: http
+  seq: 2
+}
+
+post {
+  url: https://api.mojang.com/profiles/minecraft
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  Accept: application/json
+}
+
+body:json {
+  [
+    "SaintOffline",
+    "SaintOnline"
+  ]
+}
