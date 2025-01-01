@@ -23,7 +23,7 @@ class Client
         $this->connection = new MinecraftQuery;
 
         try {
-            $this->connection->Connect('dev2.skyblock.net', 5235);
+            $this->connection->Connect($server->ip(), $server->port());
 
             $serverInfo = $this->connection->GetInfo();
             $players = $this->connection->GetPlayers();

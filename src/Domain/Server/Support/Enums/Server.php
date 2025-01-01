@@ -2,7 +2,13 @@
 
 namespace Domain\Server\Support\Enums;
 
-enum Server: string
+use Domain\Server\Support\Enums\Attributes\ServerAttributes;
+use Domain\Server\Support\Enums\Concerns\WithServerAttributes;
+
+enum Server
 {
-    case SkyblockEconomy = 'dev2.skyblock.net:5235';
+    use WithServerAttributes;
+
+    #[ServerAttributes('dev2.skyblock.net', 5235)]
+    case SkyblockEconomy;
 }
