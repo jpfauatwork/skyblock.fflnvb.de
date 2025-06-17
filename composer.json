@@ -19,7 +19,7 @@
         "laravel-notification-channels/telegram": "^6.0",
         "laravel/framework": "^12.0",
         "laravel/pint": "^1.13",
-        "laravel/sail": "^1.30",
+        "laravel/sail": "^1.41",
         "laravel/sanctum": "^4.0",
         "mockery/mockery": "^1.6",
         "spatie/laravel-ignition": "^2.4"
