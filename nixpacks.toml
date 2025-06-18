@@ -176,3 +176,14 @@ http {
     }
 }
 '''
+
+"worker-nightwatch.conf" = '''
+[program:worker-nightwatch]
+process_name=%(program_name)s_%(process_num)02d
+command=php /app/artisan nightwatch:agent
+autostart=true
+autorestart=true
+startsecs=0
+stdout_logfile=/var/log/worker-nightwatch.log
+stderr_logfile=/var/log/worker-nightwatch.log
+'''
